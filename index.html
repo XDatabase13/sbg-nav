@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBG 理論株価モニター — ソフトバンクグループNAV</title>
+<meta name="description" content="ソフトバンクグループ(9984)のNAV(時価純資産)に基づく理論株価と実株価とのディスカウント率を毎朝算出。計算過程・データ源・基準時刻をすべて開示。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --bg:     #0a0e14;
+  --panel:  #121823;
+  --panel2: #0e141d;
+  --line:   #1e2733;
+  --ink:    #e6edf3;
+  --sub:    #a8b3c0;
+  --dim:    #7c8a9c;
+  --up:     #3fb950;
+  --down:   #f85149;
+  --accent: #d4a548;
+  --mono:   'Roboto Mono', monospace;
+  --sans:   'Zen Kaku Gothic New', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(circle at 50% -10%, rgba(212,165,72,.06), transparent 55%);
+  min-height: 100vh;
+}
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ── Header ───────────────────────────────────── */
+header { padding: 38px 0 22px; border-bottom: 1px solid var(--line); }
+.kicker { font-family: var(--mono); font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; letter-spacing: -.01em; line-height: 1.2; }
+h1 .code { font-family: var(--mono); color: var(--sub); font-weight: 500; font-size: .65em; margin-left: 10px; }
+.tagline { color: var(--sub); font-size: .9rem; margin-top: 10px; max-width: 580px; }
+.header-meta { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 16px; font-family: var(--mono); font-size: .72rem; color: var(--dim); }
+.header-meta b { color: var(--sub); font-weight: 500; }
+.banner { margin-top: 14px; padding: 10px 14px; border-radius: 8px; font-size: .82rem;
+  background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.3); color: #ffb4b0; display: none; }
+
+/* ── Hero ─────────────────────────────────────── */
+.hero { margin-top: 28px; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 14px; }
+@media(max-width:680px) { .hero { grid-template-columns: 1fr; } }
+.hero-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px 20px; }
+.hero-card.primary { border-color: rgba(212,165,72,.45); }
+.hero-label { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
+.hero-val { font-family: var(--mono); font-size: 2.1rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.hero-val .yen { font-size: .55em; color: var(--sub); margin-right: 2px; }
+.hero-sub { font-family: var(--mono); font-size: .8rem; color: var(--sub); margin-top: 6px; }
+.chg { font-family: var(--mono); font-size: .84rem; font-weight: 500; margin-top: 6px; }
+.disc-val { font-family: var(--mono); font-size: 2rem; font-weight: 700; }
+.disc-label { font-size: .82rem; margin-top: 4px; }
+.up   { color: var(--up); }
+.down { color: var(--down); }
+
+/* ── OpenAI panel ─────────────────────────────── */
+.oa-panel {
+  margin-top: 26px;
+  background: var(--panel2);
+  border: 1px solid rgba(212,165,72,.35);
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+}
+.oa-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.oa-badge {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .12em;
+  background: rgba(212,165,72,.14); color: var(--accent);
+  border: 1px solid rgba(212,165,72,.4); border-radius: 20px; padding: 3px 11px;
+}
+.oa-subtitle { font-size: .8rem; color: var(--sub); }
+.oa-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+@media(max-width:680px) { .oa-grid { grid-template-columns: 1fr; gap: 14px; } }
+.oa-item .oa-lbl { font-size: .74rem; color: var(--sub); margin-bottom: 4px; }
+.oa-item .oa-num { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.oa-item .oa-unit { font-family: var(--mono); font-size: .72rem; color: var(--sub); }
+.oa-item .oa-asof { font-family: var(--mono); font-size: .67rem; color: var(--dim); margin-top: 3px; }
+.oa-item .oa-note { font-size: .68rem; color: var(--dim); margin-top: 2px; line-height: 1.5; }
+.oa-trend { font-size: .88rem; color: var(--ink); line-height: 1.6; }
+.oa-future {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+  font-size: .8rem; color: var(--sub); text-align: center;
+  font-family: var(--mono); letter-spacing: .04em;
+}
+
+/* ── Section header ───────────────────────────── */
+.section { margin-top: 32px; }
+.section-title {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-weight: 700;
+}
+
+/* ── NAV cards ────────────────────────────────── */
+.nav-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media(max-width:680px) { .nav-grid { grid-template-columns: 1fr; } }
+.nav-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px; }
+.nav-card.live { border-color: rgba(212,165,72,.4); }
+.nav-tag { font-family: var(--mono); font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+.nav-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); flex-shrink: 0; }
+.nav-card.official1 .dot { background: var(--sub); }
+.nav-card.official2 .dot { background: #4a9eff; }
+.nav-card.live .dot { background: var(--accent); }
+.nav-val { font-family: var(--mono); font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; }
+.nav-val .yen { font-size: .55em; color: var(--sub); margin-right: 2px; }
+.nav-tn { font-family: var(--mono); font-size: .8rem; color: var(--sub); margin-top: 4px; }
+.nav-date { font-family: var(--mono); font-size: .7rem; color: var(--dim); margin-top: 6px; }
+.nav-disc { font-family: var(--mono); font-size: .88rem; font-weight: 600; margin-top: 10px; }
+.nav-desc { font-size: .75rem; color: var(--sub); margin-top: 8px; line-height: 1.6; }
+.nav-verify { font-family: var(--mono); font-size: .67rem; color: var(--up); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+.nav-openai-note { font-size: .65rem; color: var(--dim); margin-top: 4px; }
+
+/* ── Market table ─────────────────────────────── */
+table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-family: var(--mono); font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); font-weight: 500; }
+td.tk { font-family: var(--mono); color: var(--sub); font-size: .78rem; }
+td.px { font-family: var(--mono); font-weight: 500; }
+td.dt { font-family: var(--mono); color: var(--dim); font-size: .76rem; }
+.st { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+.st.ok { background: var(--up); } .st.failed { background: var(--down); } .st.stale { background: var(--accent); }
+
+/* ── Methodology ──────────────────────────────── */
+.method-box { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-top: 14px; }
+.method-step { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .83rem; }
+.method-step:last-of-type { border-bottom: none; }
+.step-n { font-family: var(--mono); font-size: .68rem; color: var(--accent); min-width: 54px; padding-top: 2px; }
+.step-body { color: var(--sub); line-height: 1.75; }
+.step-body code { font-family: var(--mono); color: var(--ink); background: var(--bg); padding: 2px 6px; border-radius: 4px; font-size: .82em; }
+.method-errors { margin-top: 16px; padding: 14px 16px; background: rgba(248,81,73,.05); border: 1px solid rgba(248,81,73,.18); border-radius: 8px; }
+.err-title { font-family: var(--mono); font-size: .7rem; color: var(--sub); margin-bottom: 10px; }
+.err-row { display: flex; gap: 10px; font-size: .8rem; color: var(--sub); line-height: 1.7; margin-top: 8px; }
+.err-num { font-family: var(--mono); color: var(--down); min-width: 22px; }
+.method-times { margin-top: 14px; font-size: .76rem; color: var(--dim); line-height: 1.85; border-top: 1px solid var(--line); padding-top: 12px; }
+
+/* ── Chart placeholders ───────────────────────── */
+.chart-ph {
+  margin-top: 14px; background: var(--panel2);
+  border: 2px dashed var(--line); border-radius: 12px;
+  padding: 52px 20px; text-align: center;
+}
+.chart-ph-title { font-family: var(--mono); font-size: .82rem; color: var(--sub); letter-spacing: .06em; }
+.chart-ph-sub { font-size: .78rem; color: var(--dim); margin-top: 8px; }
+/* ── Trend chart ──────────────────────────────── */
+.chart-note { font-size: .76rem; color: var(--sub); margin-bottom: 10px; line-height: 1.7; }
+.chart-wrap {
+  background: var(--panel2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 20px 20px 14px;
+  position: relative; height: 360px;
+}
+@media(max-width:680px) { .chart-wrap { height: 280px; } }
+
+/* ── Pie charts ───────────────────────────────── */
+.pie-legend-wrap { margin: 10px 0 4px; }
+.pie-legend { display: flex; flex-wrap: wrap; gap: 5px 14px; justify-content: center; }
+.pie-legend-item { display: flex; align-items: center; gap: 5px; font-size: .74rem; color: var(--sub); font-family: var(--mono); }
+.pie-legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.pie-row { display: flex; gap: 12px; margin-top: 14px; }
+.pie-cell { flex: 1; background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 12px 14px; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.pie-label { font-family: var(--mono); font-size: .8rem; color: var(--ink); font-weight: 700; margin-bottom: 3px; text-align: center; }
+.pie-sub { font-family: var(--mono); font-size: .62rem; color: var(--dim); margin-bottom: 10px; text-align: center; line-height: 1.5; }
+.pie-canvas-wrap { width: 100%; max-width: 190px; }
+.pie-arm-pct { margin-top: 8px; font-family: var(--mono); font-size: .72rem; text-align: center; }
+.pie-arm-pct .arm-val { color: var(--accent); font-weight: 700; font-size: .88rem; }
+@media(max-width:680px) {
+  .pie-row { flex-direction: column; }
+  .pie-cell { flex-direction: row; gap: 16px; align-items: center; }
+  .pie-canvas-wrap { width: 110px; flex-shrink: 0; max-width: none; }
+  .pie-arm-pct { margin-top: 0; }
+}
+
+/* ── Assumption box ──────────────────────────── */
+.assume-box {
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(212,165,72,.05);
+  border: 1px solid rgba(212,165,72,.22);
+  border-radius: 10px;
+  font-size: .78rem;
+  color: var(--sub);
+  line-height: 1.75;
+}
+.assume-label {
+  font-family: var(--mono);
+  font-size: .63rem;
+  letter-spacing: .12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* ── Future expansion card ────────────────────── */
+.future-card {
+  margin-top: 14px; background: var(--panel2);
+  border: 1px dashed var(--line); border-radius: 12px; padding: 22px 20px;
+}
+.future-badge { display: inline-block; font-family: var(--mono); font-size: .63rem; letter-spacing: .1em; color: var(--dim); border: 1px solid var(--line); border-radius: 20px; padding: 2px 9px; margin-bottom: 10px; }
+.future-title { font-size: .96rem; font-weight: 700; margin-bottom: 8px; }
+.future-desc { font-size: .81rem; color: var(--sub); line-height: 1.8; }
+
+/* ── Footer ───────────────────────────────────── */
+footer { margin-top: 44px; padding: 22px 0 40px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--dim); line-height: 1.85; }
+.disclaimer { background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; color: var(--sub); font-size: .78rem; }
+footer a { color: var(--sub); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ①  HEADER ─────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="kicker">SoftBank Group NAV Monitor</div>
+  <h1>SBG 理論株価モニター<span class="code">TSE:9984</span></h1>
+  <p class="tagline">ソフトバンクグループのNAV（時価純資産）に基づく理論株価と実株価とのディスカウント率を提供します。計算過程・データ源・基準時刻もすべて提示します。</p>
+  <div class="header-meta">
+    <span><b>生成:</b> <span id="gen-at">—</span></span>
+    <span><b>基準:</b> 米国市場クローズ後（毎朝更新）</span>
+    <span>市場データの基準日は下表参照</span>
+  </div>
+  <div id="banner" class="banner"></div>
+</header>
+
+<!-- ②  HERO ─────────────────────────────────────────────────────────────────── -->
+<div class="hero" style="margin-top:28px">
+
+  <div class="hero-card primary">
+    <div class="hero-label">② 理論株価（リアルタイムNAV）</div>
+    <div class="hero-val"><span class="yen">¥</span><span id="h-ideal">—</span></div>
+    <div class="hero-sub" id="h-ideal-tn">—</div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-label">SBG 実株価（最新終値）</div>
+    <div class="hero-val"><span class="yen">¥</span><span id="h-sbg">—</span></div>
+    <div class="chg" id="h-chg">—</div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-label">② ディスカウント率</div>
+    <div class="disc-val" id="h-disc">—</div>
+    <div class="disc-label" id="h-disc-label">—</div>
+  </div>
+
+</div>
+
+<!-- D  前提条件ボックス ────────────────────────────────────────────────────── -->
+<div class="assume-box">
+  <span class="assume-label">本試算の前提条件</span>
+  当サイトのリアルタイムNAVは、直近四半期末（2026年3月末）から純負債および上場株の担保割合が変動していないという仮定に基づく簡易試算です。純負債（8.21兆円）は2026年3月末時点の公式値を使用し、次回の四半期決算発表時に更新します。
+</div>
+
+<!-- ③  OPENAI APPEAL ──────────────────────────────────────────────────────── -->
+<div class="oa-panel">
+  <div class="oa-head">
+    <span class="oa-badge">OpenAI</span>
+    <span class="oa-subtitle">SBGポートフォリオに織込み済み（SVF2経由）</span>
+  </div>
+  <div class="oa-grid">
+    <div class="oa-item">
+      <div class="oa-lbl">SBG 持分価値</div>
+      <div><span class="oa-num" id="oa-stake">—</span><span class="oa-unit"> 億ドル</span></div>
+      <div class="oa-asof" id="oa-stake-ao">—</div>
+      <div class="oa-note">SBG公式確定値</div>
+    </div>
+    <div class="oa-item">
+      <div class="oa-lbl">OpenAI 企業価値（全体）</div>
+      <div><span class="oa-num" id="oa-val">—</span><span class="oa-unit"> 億ドル</span></div>
+      <div class="oa-asof" id="oa-val-ao">—</div>
+      <div class="oa-note" id="oa-val-note"></div>
+    </div>
+    <div class="oa-item">
+      <div class="oa-lbl">成長トレンド</div>
+      <div class="oa-trend" id="oa-trend">—</div>
+      <div class="oa-note" style="margin-top:6px">※持分価値と企業価値は母数が異なるため単純比較不可</div>
+    </div>
+  </div>
+  <div class="oa-future" id="oa-future">—</div>
+  <div style="margin-top:8px; font-family:var(--mono); font-size:.65rem; color:var(--dim); text-align:center;">※ 2026年4月以降の追加出資（トランシェ）は未反映。上記は2026年3月末時点の確定値。</div>
+</div>
+
+<!-- ④  3つのNAV比較 ─────────────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">3つのNAV 比較</div>
+  <div class="nav-grid">
+
+    <!-- ①-a -->
+    <div class="nav-card official1">
+      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年3月末・確定値）</div>
+      <div class="nav-val"><span class="yen">¥</span><span id="nava-val">—</span></div>
+      <div class="nav-tn" id="nava-tn">—</div>
+      <div class="nav-date" id="nava-date">—</div>
+      <div class="nav-desc">SBGが四半期末に公表する確定NAV。年4回手動更新。</div>
+    </div>
+
+    <!-- ①-b -->
+    <div class="nav-card official2">
+      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年5月12日・参考試算）</div>
+      <div class="nav-val"><span class="yen">¥</span><span id="navb-val">—</span></div>
+      <div class="nav-tn" id="navb-tn">—</div>
+      <div class="nav-date" id="navb-date">—</div>
+      <div class="nav-desc" id="navb-desc">SBGが2026年5月12日時点の株価・為替で試算した公式参考値。</div>
+    </div>
+
+    <!-- ② -->
+    <div class="nav-card live">
+      <div class="nav-tag"><span class="dot"></span>リアルタイムNAV ☆毎日更新</div>
+      <div class="nav-val"><span class="yen">¥</span><span id="nav2-val">—</span></div>
+      <div class="nav-tn" id="nav2-tn">—</div>
+      <div class="nav-date">上場株 = 最新終値</div>
+      <div class="nav-disc" id="nav2-disc">—</div>
+      <div class="nav-verify">5/12検証: 公式参考値(47.7兆)を誤差1.4%以内で再現</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑤  市場データ表 ─────────────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">市場データ / Market Snapshot</div>
+  <table>
+    <thead>
+      <tr><th>銘柄</th><th>ティッカー</th><th>終値</th><th>基準日</th><th>状態</th></tr>
+    </thead>
+    <tbody id="mkt-body"></tbody>
+  </table>
+</div>
+
+<!-- ⑥  計算過程 ────────────────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">計算過程 / Methodology</div>
+  <div class="method-box">
+
+    <div class="method-step">
+      <div class="step-n">Step 1</div>
+      <div class="step-body">
+        各上場株の今日価値（兆円）を算出：<br>
+        <code>米国株(Arm/T-Mobile) = 3月末調整後価値 × (今日終値 ÷ 3月末終値) × (今日USDJPY ÷ 3月末USDJPY)</code><br>
+        <code>日本株(SBKK)　　　　 = 3月末調整後価値 × (今日終値 ÷ 3月末終値)</code>
+      </div>
+    </div>
+
+    <div class="method-step">
+      <div class="step-n">Step 2</div>
+      <div class="step-body">非上場資産（SVF1+SVF2+LatAm+その他 = 26.22兆）と純負債（8.21兆）は <span id="m-asof">2026-03-31</span> 固定</div>
+    </div>
+
+    <div class="method-step">
+      <div class="step-n">Step 3</div>
+      <div class="step-body"><code>②保有合計 = Arm今日価値 + SBKK今日価値 + T-Mobile今日価値 + 26.22兆</code></div>
+    </div>
+
+    <div class="method-step">
+      <div class="step-n">Step 4</div>
+      <div class="step-body">
+        <code>②NAV(兆円) = ②保有合計 − 8.21兆</code><br>
+        <code>②理論株価(円) = ②NAV × 1兆 ÷ 5,698,923,701株</code>
+      </div>
+    </div>
+
+    <div class="method-step">
+      <div class="step-n">Step 5</div>
+      <div class="step-body">
+        <code>②ディスカウント率 = (1 − SBG実株価 ÷ ②理論株価) × 100</code><br>
+        プラス = 実株価がNAVより割安（SBGに買い余地あり）。マイナス = 割高。
+      </div>
+    </div>
+
+    <div class="method-errors">
+      <div class="err-title">▼ 誤差の要因</div>
+      <div class="err-row">
+        <span class="err-num">(1)</span>
+        <div><b>非上場部分の四半期固定</b>: SVF2/SVF1/LatAm/その他は3月末公式値を次の決算まで据え置き。この間に実際の評価額は変動しているため乖離が生じる。</div>
+      </div>
+      <div class="err-row">
+        <span class="err-num">(2)</span>
+        <div><b>上場株の担保分の簡易処理</b>: Arm等はマージンローン等の担保に入っており、公式は担保分を控除した「調整後価値」で計算する。本計算では担保株も株価比率で動かしているため、担保分の変動が誤差になる。</div>
+      </div>
+    </div>
+
+    <div class="method-times">
+      各データは取得時点の最新終値を使用。基準日は市場データ表を参照。
+    </div>
+
+  </div>
+</div>
+
+<!-- ⑦  推移グラフ ──────────────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">② 理論株価 &amp; SBG実株価の推移 / Trend</div>
+  <p class="chart-note">塗りつぶし部分（金色）が割安度（ディスカウント）。差が大きいほど実株価がNAVより割安。緑の点は公式NAV発表値 — ①-a（3月末）は計算の起点のため一致。①-b（5月12日）との一致（誤差1.4%）が試算精度の確認になる。</p>
+  <div class="chart-wrap">
+    <canvas id="trend-chart"></canvas>
+  </div>
+
+  <p class="chart-note" style="margin-top:22px">割安度の推移。SBGは恒常的に割安だが、その深さの変化を見る。緑の点は公式NAVを基準にした割安度（②線との差 = 計算誤差）。</p>
+  <div class="chart-wrap" style="height:220px">
+    <canvas id="disc-chart"></canvas>
+  </div>
+</div>
+
+<!-- ⑧  NAV構成 円グラフ -->
+<div class="section">
+  <div class="section-title">NAV 構成比 / Composition</div>
+  <p class="chart-note">NAV構成の推移。Armの比率が拡大しているのが分かる。<span style="color:var(--dim)">※ 純負債を除く保有資産の構成比。</span></p>
+  <div class="pie-legend-wrap">
+    <div id="pie-legend" class="pie-legend"></div>
+  </div>
+  <div class="pie-row">
+    <div class="pie-cell">
+      <div class="pie-label" id="pie-title-mar31">—</div>
+      <div class="pie-sub"  id="pie-sub-mar31">—</div>
+      <div class="pie-canvas-wrap"><canvas id="pie-mar31"></canvas></div>
+      <div class="pie-arm-pct" id="pie-arm-mar31"></div>
+    </div>
+    <div class="pie-cell">
+      <div class="pie-label" id="pie-title-may12">—</div>
+      <div class="pie-sub"  id="pie-sub-may12">—</div>
+      <div class="pie-canvas-wrap"><canvas id="pie-may12"></canvas></div>
+      <div class="pie-arm-pct" id="pie-arm-may12"></div>
+    </div>
+    <div class="pie-cell">
+      <div class="pie-label" id="pie-title-latest">—</div>
+      <div class="pie-sub"  id="pie-sub-latest">—</div>
+      <div class="pie-canvas-wrap"><canvas id="pie-latest"></canvas></div>
+      <div class="pie-arm-pct" id="pie-arm-latest"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑨  将来拡張カード ─────────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">将来拡張 / Roadmap</div>
+  <div class="future-card">
+    <div class="future-badge">準備中</div>
+    <div class="future-title">OpenAI 上場時 — リアルタイム反映</div>
+    <div class="future-desc">
+      OpenAIが株式上場した時点で、SBGのOpenAI持分をリアルタイムの株価・為替で評価し、リアルタイムNAV（②）に直接組み込み、毎日自動更新する予定。<br>
+      現在、OpenAIはSVF2（非上場枠=26.22兆の中）に含まれており、上場前は公式評価額で固定扱い。上場後は②と同じ仕組みで日次計算が可能になる。
+    </div>
+  </div>
+</div>
+
+<!-- ⑩  FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="disclaimer">
+    本サイトは公開データに基づく数理的な試算です。投資勧誘・投資助言を目的とするものではありません。掲載値の正確性・完全性を保証するものではなく、投資判断はご自身の責任で行ってください。
+  </div>
+  <div>
+    データ源: 市場データ = Yahoo Finance (yfinance) &nbsp;/&nbsp;
+    公式NAV・OpenAI数値 = <a href="https://group.softbank/ir/stock/sotp" target="_blank" rel="noopener">SBG IR (SOTP)</a>・SBG公式プレスリリース<br>
+    1日1回、米国市場クローズ後（日本時間 毎朝）に自動更新。
+  </div>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(async () => {
+  const $   = id => document.getElementById(id);
+  const yen = n  => n == null ? "—" : Math.round(n).toLocaleString("ja-JP");
+  const num = (n, d = 2) => n == null ? "—" :
+    Number(n).toLocaleString("ja-JP", {minimumFractionDigits: d, maximumFractionDigits: d});
+  const pct = (v, showSign = true) => v == null ? "—" :
+    `${v >= 0 && showSign ? "+" : ""}${num(v, 1)}%`;
+  const oku = v => v == null ? "—" : Math.round(v * 10).toLocaleString("ja-JP");
+
+  // ── Fetch data.json ────────────────────────────────────────────────────────
+  let d;
+  try {
+    const res = await fetch("data.json", {cache: "no-store"});
+    d = await res.json();
+  } catch (e) {
+    const b = $("banner");
+    b.style.display = "block";
+    b.textContent = "データを読み込めませんでした。ページを再読み込みしてください。";
+    return;
+  }
+
+  if (d.status && d.status !== "complete") {
+    const b = $("banner");
+    b.style.display = "block";
+    b.textContent = "一部の市場データを取得できませんでした（ステータス: " + d.status +
+      "）。前回値または欠損を表示しています。";
+  }
+
+  // ── ① Header ──────────────────────────────────────────────────────────────
+  $("gen-at").textContent = d.generated_at
+    ? d.generated_at.replace("T", " ").replace("Z", " UTC") : "—";
+
+  // ── ② Hero ────────────────────────────────────────────────────────────────
+  const semi     = (d.nav || {}).semi || {};
+  const sbgNow   = semi.sbg_price_jpy;
+  const sbgPrev  = (d.market || {}).sbg?.prev_close;
+  const idealPer = semi.nav_per_share_jpy;
+  const discPct  = semi.discount_pct;
+
+  $("h-ideal").textContent    = yen(idealPer);
+  $("h-ideal-tn").textContent = semi.nav_tn != null ? `${num(semi.nav_tn, 2)}兆円` : "—";
+  $("h-sbg").textContent      = yen(sbgNow);
+
+  if (sbgNow != null && sbgPrev != null) {
+    const chg    = sbgNow - sbgPrev;
+    const chgPct = chg / sbgPrev * 100;
+    const sign   = chg >= 0 ? "+" : "";
+    const el     = $("h-chg");
+    el.textContent = `${sign}${Math.round(chg).toLocaleString("ja-JP")}円  (${sign}${num(chgPct, 2)}%)`;
+    el.className   = "chg " + (chg >= 0 ? "up" : "down");
+  }
+
+  if (discPct != null) {
+    const el = $("h-disc");
+    el.textContent = pct(discPct);
+    el.className   = "disc-val " + (discPct >= 0 ? "up" : "down");
+    $("h-disc-label").textContent = discPct >= 0 ? "割安（実株価 < NAV）" : "割高（実株価 > NAV）";
+    $("h-disc-label").className   = "disc-label " + (discPct >= 0 ? "up" : "down");
+  }
+
+  // ── ③ OpenAI ──────────────────────────────────────────────────────────────
+  const oa = d.openai || {};
+  $("oa-stake").textContent   = oku(oa.sbg_stake_value_usd_bn);
+  $("oa-stake-ao").textContent = oa.sbg_stake_value_as_of || "—";
+  $("oa-val").textContent     = oku(oa.company_valuation_usd_bn);
+  $("oa-val-ao").textContent  = oa.company_valuation_as_of || "—";
+  $("oa-val-note").textContent = oa.company_valuation_note || "";
+  $("oa-trend").textContent   = oa.trend_note || "—";
+  $("oa-future").textContent  = oa.future_note || "";
+
+  // ── ④ NAV cards ───────────────────────────────────────────────────────────
+  const navA = (d.nav || {}).official_a || {};
+  const navB = (d.nav || {}).official_b || {};
+
+  // ①-a
+  $("nava-val").textContent  = yen(navA.nav_per_share_jpy);
+  $("nava-tn").textContent   = navA.total_tn != null ? `${num(navA.total_tn, 2)}兆円` : "—";
+  $("nava-date").textContent = navA.as_of || "—";
+
+  // ①-b
+  $("navb-val").textContent  = yen(navB.nav_per_share_jpy);
+  $("navb-tn").textContent   = navB.total_tn != null ? `${num(navB.total_tn, 1)}兆円` : "—";
+  $("navb-date").textContent = navB.as_of ? `${navB.as_of} 試算` : "—";
+
+  // ②
+  $("nav2-val").textContent = yen(idealPer);
+  $("nav2-tn").textContent  = semi.nav_tn != null ? `${num(semi.nav_tn, 2)}兆円` : "—";
+  if (discPct != null) {
+    const el = $("nav2-disc");
+    el.textContent = `${pct(discPct)} ${discPct >= 0 ? "割安" : "割高"}（実株価 vs ②）`;
+    el.className   = "nav-disc " + (discPct >= 0 ? "up" : "down");
+  }
+
+  // ── ⑤ Market table ────────────────────────────────────────────────────────
+  const names = {
+    arm: "Arm", tmus: "T-Mobile US",
+    sbkk: "ソフトバンク (SBKK)", sbg: "ソフトバンクG (SBG)", usdjpy: "米ドル / 円"
+  };
+  const mkt  = d.market || {};
+  const tbody = $("mkt-body");
+  ["arm", "tmus", "sbkk", "sbg", "usdjpy"].forEach(k => {
+    const m = mkt[k]; if (!m) return;
+    const closeStr = m.close == null ? "—"
+      : k === "usdjpy"               ? num(m.close, 3) + " 円/ドル"
+      : (k === "arm" || k === "tmus") ? "$" + num(m.close, 2)
+      : "¥" + num(m.close, 2);
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      `<td>${names[k] || k}</td>` +
+      `<td class="tk">${m.ticker || "—"}</td>` +
+      `<td class="px">${closeStr}</td>` +
+      `<td class="dt">${m.date || "—"}</td>` +
+      `<td><span class="st ${m.status || "failed"}"></span></td>`;
+    tbody.appendChild(tr);
+  });
+
+  // ── ⑥ Methodology date ────────────────────────────────────────────────────
+  $("m-asof").textContent = (d.official || {}).as_of || "2026-03-31";
+
+  // ── ⑦ Trend chart ─────────────────────────────────────────────────────────
+  const ts  = d.timeseries || [];
+  const ops = d.official_points || [];
+
+  if (ts.length > 0 && typeof Chart !== "undefined") {
+    const labels       = ts.map(r => r.date);
+    const idealPrices  = ts.map(r => r.nav_per_share);
+    const sbgPrices    = ts.map(r => r.sbg_price);
+    const discPcts     = ts.map(r => r.discount_pct);
+
+    // 公式NAVをスパース配列に変換（該当日以外はnull）
+    const officialData = labels.map(date => {
+      const pt = ops.find(p => p.date === date);
+      return pt ? pt.nav_per_share : null;
+    });
+    const ptRadii = labels.map((_, i) => officialData[i] != null ? 9 : 0);
+    const ptHover = labels.map((_, i) => officialData[i] != null ? 12 : 4);
+
+    // 公式点の上にラベルを描画するカスタムプラグイン
+    const officialLabelPlugin = {
+      id: "officialLabels",
+      afterDatasetsDraw(chart) {
+        const ctx  = chart.ctx;
+        const meta = chart.getDatasetMeta(2);
+        if (!meta) return;
+        ops.forEach(pt => {
+          const idx = labels.indexOf(pt.date);
+          if (idx < 0 || officialData[idx] == null) return;
+          const el = meta.data[idx];
+          if (!el) return;
+          const text = pt.label.includes("確定") ? "①-a" : "①-b";
+          ctx.save();
+          ctx.font = "bold 11px 'Roboto Mono', monospace";
+          ctx.fillStyle = "#3fb950";
+          ctx.textAlign = "center";
+          ctx.fillText(text, el.x, el.y - 15);
+          ctx.restore();
+        });
+      },
+    };
+
+    new Chart(document.getElementById("trend-chart"), {
+      type: "line",
+      plugins: [officialLabelPlugin],
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "② 理論株価（リアルタイムNAV）",
+            data: idealPrices,
+            borderColor: "#d4a548",
+            backgroundColor: "rgba(212,165,72,0.09)",
+            borderWidth: 2.5,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            tension: 0.3,
+            fill: {target: "+1", above: "rgba(212,165,72,0.09)", below: "rgba(248,81,73,0.05)"},
+            order: 2,
+          },
+          {
+            label: "SBG 実株価",
+            data: sbgPrices,
+            borderColor: "#8b97a7",
+            backgroundColor: "transparent",
+            borderWidth: 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            tension: 0.3,
+            order: 3,
+          },
+          {
+            label: "公式NAV（①-a / ①-b）",
+            data: officialData,
+            borderColor: "#3fb950",
+            backgroundColor: "#3fb950",
+            borderWidth: 0,
+            pointRadius: ptRadii,
+            pointHoverRadius: ptHover,
+            pointStyle: "circle",
+            showLine: false,
+            spanGaps: false,
+            order: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {mode: "index", intersect: false},
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              color: "#a8b3c0",
+              font: {family: "'Roboto Mono', monospace", size: 11},
+              usePointStyle: true,
+              pointStyleWidth: 16,
+              padding: 18,
+            },
+          },
+          tooltip: {
+            backgroundColor: "#0e141d",
+            borderColor: "#1e2733",
+            borderWidth: 1,
+            titleColor: "#e6edf3",
+            titleFont: {family: "'Roboto Mono', monospace", size: 11, weight: "700"},
+            bodyColor: "#a8b3c0",
+            bodyFont: {family: "'Roboto Mono', monospace", size: 11},
+            footerColor: "#d4a548",
+            footerFont: {family: "'Roboto Mono', monospace", size: 11, weight: "700"},
+            padding: 12,
+            callbacks: {
+              label(item) {
+                const v = item.raw;
+                if (v == null) return null;
+                return `  ${item.dataset.label}: ¥${Math.round(v).toLocaleString("ja-JP")}`;
+              },
+              footer(items) {
+                const idx = items[0]?.dataIndex;
+                const d = discPcts[idx];
+                if (d == null) return "";
+                const sign = d >= 0 ? "+" : "";
+                return `  ディスカウント率: ${sign}${d.toFixed(1)}%`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {color: "#1e2733"},
+            ticks: {
+              color: "#7c8a9c",
+              font: {family: "'Roboto Mono', monospace", size: 10},
+              maxTicksLimit: 10,
+              maxRotation: 0,
+              autoSkip: true,
+              callback(val) {
+                const dateStr = labels[val];
+                if (!dateStr) return "";
+                const p = dateStr.split("-");
+                return `${parseInt(p[1])}/${parseInt(p[2])}`;
+              },
+            },
+          },
+          y: {
+            grid: {color: "#1e2733"},
+            ticks: {
+              color: "#7c8a9c",
+              font: {family: "'Roboto Mono', monospace", size: 10},
+              callback: v => "¥" + v.toLocaleString("ja-JP"),
+            },
+          },
+        },
+      },
+    });
+
+    // ── ディスカウント率チャート ──────────────────────────────────────────────
+    const discOfficialData = labels.map(date => {
+      const pt = ops.find(p => p.date === date);
+      if (!pt) return null;
+      const row = ts.find(r => r.date === date);
+      if (!row || row.sbg_price == null) return null;
+      return (1 - row.sbg_price / pt.nav_per_share) * 100;
+    });
+    const discPtRadii = labels.map((_, i) => discOfficialData[i] != null ? 5 : 0);
+    const discPtHover = labels.map((_, i) => discOfficialData[i] != null ? 7 : 0);
+
+    const discLabelPlugin = {
+      id: "discLabels",
+      afterDatasetsDraw(chart) {
+        const ctx  = chart.ctx;
+        const meta = chart.getDatasetMeta(1);
+        if (!meta) return;
+        ops.forEach(pt => {
+          const idx = labels.indexOf(pt.date);
+          if (idx < 0 || discOfficialData[idx] == null) return;
+          const el = meta.data[idx];
+          if (!el) return;
+          const text = pt.label.includes("確定") ? "①-a" : "①-b";
+          ctx.save();
+          ctx.font = "bold 11px 'Roboto Mono', monospace";
+          ctx.fillStyle = "#3fb950";
+          ctx.textAlign = "center";
+          ctx.fillText(text, el.x, el.y - 15);
+          ctx.restore();
+        });
+      },
+    };
+
+    new Chart(document.getElementById("disc-chart"), {
+      type: "line",
+      plugins: [discLabelPlugin],
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "② ディスカウント率 (%)",
+            data: discPcts,
+            borderColor: "#d4a548",
+            backgroundColor: "rgba(212,165,72,0.08)",
+            borderWidth: 2,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            tension: 0.3,
+            fill: "start",
+          },
+          {
+            label: "公式NAV基準 割引率（①-a / ①-b）",
+            data: discOfficialData,
+            borderColor: "#3fb950",
+            backgroundColor: "#3fb950",
+            borderWidth: 0,
+            pointRadius: discPtRadii,
+            pointHoverRadius: discPtHover,
+            pointStyle: "circle",
+            showLine: false,
+            spanGaps: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {mode: "index", intersect: false},
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              color: "#a8b3c0",
+              font: {family: "'Roboto Mono', monospace", size: 11},
+              usePointStyle: true,
+              pointStyleWidth: 16,
+              padding: 18,
+            },
+          },
+          tooltip: {
+            backgroundColor: "#0e141d",
+            borderColor: "#1e2733",
+            borderWidth: 1,
+            titleColor: "#e6edf3",
+            titleFont: {family: "'Roboto Mono', monospace", size: 11, weight: "700"},
+            bodyColor: "#a8b3c0",
+            bodyFont: {family: "'Roboto Mono', monospace", size: 11},
+            padding: 12,
+            callbacks: {
+              label(item) {
+                const v = item.raw;
+                if (v == null) return null;
+                const sign = v >= 0 ? "+" : "";
+                return `  ${item.dataset.label}: ${sign}${v.toFixed(1)}%`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {color: "#1e2733"},
+            ticks: {
+              color: "#7c8a9c",
+              font: {family: "'Roboto Mono', monospace", size: 10},
+              maxTicksLimit: 10,
+              maxRotation: 0,
+              autoSkip: true,
+              callback(val) {
+                const dateStr = labels[val];
+                if (!dateStr) return "";
+                const p = dateStr.split("-");
+                return `${parseInt(p[1])}/${parseInt(p[2])}`;
+              },
+            },
+          },
+          y: {
+            suggestedMin: 15,
+            suggestedMax: 60,
+            grid: {color: "#1e2733"},
+            ticks: {
+              color: "#7c8a9c",
+              font: {family: "'Roboto Mono', monospace", size: 10},
+              callback(v) {
+                const sign = v >= 0 ? "+" : "";
+                return `${sign}${v.toFixed(0)}%`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // ── NAV構成 円グラフ（3時点ドーナツ） ─────────────────────────────────────
+  const snaps = d.snapshots || [];
+  if (snaps.length > 0 && typeof Chart !== "undefined") {
+    const ASSETS = [
+      {key: "arm_tn",   label: "Arm",      color: "#d4a548"},
+      {key: "svf2_tn",  label: "SVF2",     color: "#58a6ff"},
+      {key: "other_tn", label: "その他",   color: "#8b97a7"},
+      {key: "svf1_tn",  label: "SVF1",     color: "#a371f7"},
+      {key: "sbkk_tn",  label: "SBKK",    color: "#3fb950"},
+      {key: "latam_tn", label: "LatAm",   color: "#f0883e"},
+      {key: "tmus_tn",  label: "T-Mobile", color: "#ec4899"},
+    ];
+    const bgColors = ASSETS.map(a => a.color);
+    const labels   = ASSETS.map(a => a.label);
+
+    // 共通凡例を生成
+    const legendEl = document.getElementById("pie-legend");
+    if (legendEl) {
+      legendEl.innerHTML = ASSETS.map(a =>
+        `<span class="pie-legend-item">` +
+        `<span class="pie-legend-dot" style="background:${a.color}"></span>${a.label}</span>`
+      ).join("");
+    }
+
+    snaps.forEach(snap => {
+      const sfx    = snap.label; // "mar31" | "may12" | "latest"
+      const canvas = document.getElementById(`pie-${sfx}`);
+      if (!canvas) return;
+
+      const values  = ASSETS.map(a => snap[a.key] || 0);
+      const total   = values.reduce((s, v) => s + v, 0);
+      const armPct  = total > 0 ? (values[0] / total * 100) : 0;
+
+      // タイトル・サブタイトル更新
+      const titleEl = document.getElementById(`pie-title-${sfx}`);
+      const subEl   = document.getElementById(`pie-sub-${sfx}`);
+      const armEl   = document.getElementById(`pie-arm-${sfx}`);
+      if (titleEl) titleEl.textContent = snap.date;
+      if (subEl)   subEl.innerHTML =
+        `保有資産 ${snap.holdings_tn.toFixed(1)}兆円<br>NAV ${snap.nav_tn.toFixed(1)}兆円`;
+      if (armEl)   armEl.innerHTML =
+        `Arm <span class="arm-val">${armPct.toFixed(1)}%</span>`;
+
+      new Chart(canvas, {
+        type: "doughnut",
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            backgroundColor: bgColors,
+            borderColor: "#0a0e14",
+            borderWidth: 2,
+            hoverBorderColor: "#e6edf3",
+            hoverBorderWidth: 2,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          cutout: "58%",
+          plugins: {
+            legend: {display: false},
+            tooltip: {
+              backgroundColor: "#0e141d",
+              borderColor: "#1e2733",
+              borderWidth: 1,
+              titleColor: "#e6edf3",
+              titleFont: {family: "'Roboto Mono', monospace", size: 11, weight: "700"},
+              bodyColor: "#a8b3c0",
+              bodyFont: {family: "'Roboto Mono', monospace", size: 11},
+              padding: 12,
+              callbacks: {
+                label(item) {
+                  const v   = item.raw;
+                  const pct = (v / total * 100).toFixed(1);
+                  return `  ${item.label}: ${v.toFixed(2)}兆円 (${pct}%)`;
+                },
+              },
+            },
+          },
+        },
+      });
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

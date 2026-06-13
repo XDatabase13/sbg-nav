@@ -1,0 +1,763 @@
+{
+  "generated_at": "2026-06-13T02:56:52Z",
+  "reference_note": "上場株は当日終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
+  "status": "complete",
+  "market": {
+    "arm": {
+      "ticker": "ARM",
+      "close": 380.81,
+      "prev_close": 342.23,
+      "date": "2026-06-12",
+      "status": "ok"
+    },
+    "tmus": {
+      "ticker": "TMUS",
+      "close": 189.1,
+      "prev_close": 185.82,
+      "date": "2026-06-12",
+      "status": "ok"
+    },
+    "sbkk": {
+      "ticker": "9434.T",
+      "close": 213.5,
+      "prev_close": 215.0,
+      "date": "2026-06-12",
+      "status": "ok"
+    },
+    "sbg": {
+      "ticker": "9984.T",
+      "close": 6472.0,
+      "prev_close": 6374.0,
+      "date": "2026-06-12",
+      "status": "ok"
+    },
+    "usdjpy": {
+      "ticker": "USDJPY=X",
+      "close": 160.185,
+      "prev_close": 160.13,
+      "date": "2026-06-13",
+      "status": "ok"
+    }
+  },
+  "nav": {
+    "official_a": {
+      "nav_per_share_jpy": 7029,
+      "total_tn": 40.06,
+      "as_of": "2026-03-31"
+    },
+    "official_b": {
+      "nav_per_share_jpy": 8370,
+      "total_tn": 47.7,
+      "as_of": "2026-05-12",
+      "source": "https://ai.softbank/insights/022/",
+      "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
+    },
+    "semi": {
+      "nav_per_share_jpy": 12150,
+      "nav_tn": 69.2467,
+      "sbg_price_jpy": 6472.0,
+      "discount_pct": 46.7
+    },
+    "official_nav_per_share_jpy": 7029,
+    "sbg_actual_price_jpy": 6472.0,
+    "discount_pct": 7.9,
+    "semi_nav_per_share_jpy": 12150,
+    "semi_discount_pct": 46.7
+  },
+  "openai": {
+    "sbg_stake_value_usd_bn": 79.6,
+    "sbg_stake_value_as_of": "2026-03-31",
+    "company_valuation_usd_bn": 852.0,
+    "company_valuation_as_of": "2026-03-31",
+    "company_valuation_note": "2026年3月31日完了ラウンドのポストマネー評価額",
+    "trend_note": "SBG初出資時（約2,600億ドル）から約3.3倍に成長",
+    "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
+  },
+  "nav_breakdown": {
+    "arm_value_tn_jpy": 48.3091,
+    "sbkk_value_tn_jpy": 2.8824,
+    "tmus_value_tn_jpy": 0.0451,
+    "unlisted_tn_jpy": 26.22,
+    "holdings_total_tn_jpy": 77.4567,
+    "net_debt_tn_jpy": 8.21,
+    "semi_nav_tn_jpy": 69.2467
+  },
+  "official": {
+    "as_of": "2026-03-31",
+    "source": "https://group.softbank/ir/stock/sotp",
+    "official_nav_per_share_jpy": 7029,
+    "nav_total_tn": 40.06,
+    "holdings_total_jpy_tn": 48.26,
+    "net_debt_jpy_tn": 8.21,
+    "shares_outstanding": 5698923701,
+    "note": "SBG公式SOTPの四半期末値。次回決算発表時に手動更新する。",
+    "as_of_fx_usdjpy": 159.841,
+    "components": {
+      "listed": {
+        "arm": {
+          "value_tn_jpy": 19.15,
+          "price_asof": 151.28,
+          "currency": "USD"
+        },
+        "sbkk": {
+          "value_tn_jpy": 2.85,
+          "price_asof": 211.1,
+          "currency": "JPY"
+        },
+        "tmus": {
+          "value_tn_jpy": 0.05,
+          "price_asof": 210.03,
+          "currency": "USD"
+        }
+      },
+      "unlisted_total_tn_jpy": 26.22,
+      "net_debt_tn_jpy": 8.21
+    },
+    "official_b": {
+      "nav_per_share_jpy": 8370,
+      "total_tn": 47.7,
+      "as_of": "2026-05-12",
+      "source": "https://ai.softbank/insights/022/",
+      "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
+    },
+    "openai": {
+      "sbg_stake_value_usd_bn": 79.6,
+      "sbg_stake_value_as_of": "2026-03-31",
+      "company_valuation_usd_bn": 852.0,
+      "company_valuation_as_of": "2026-03-31",
+      "company_valuation_note": "2026年3月31日完了ラウンドのポストマネー評価額",
+      "trend_note": "SBG初出資時（約2,600億ドル）から約3.3倍に成長",
+      "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
+    }
+  },
+  "timeseries": [
+    {
+      "date": "2026-03-31",
+      "nav_tn": 40.06,
+      "nav_per_share": 7029,
+      "sbg_price": 3555.0,
+      "discount_pct": 49.4,
+      "arm": 151.28,
+      "sbkk": 211.1,
+      "usdjpy": 159.841
+    },
+    {
+      "date": "2026-04-01",
+      "nav_tn": 40.4087,
+      "nav_per_share": 7090,
+      "sbg_price": 3764.0,
+      "discount_pct": 46.9,
+      "arm": 155.07,
+      "sbkk": 213.0,
+      "usdjpy": 158.579
+    },
+    {
+      "date": "2026-04-02",
+      "nav_tn": 39.7048,
+      "nav_per_share": 6967,
+      "sbg_price": 3604.0,
+      "discount_pct": 48.3,
+      "arm": 149.11,
+      "sbkk": 215.4,
+      "usdjpy": 158.688
+    },
+    {
+      "date": "2026-04-03",
+      "nav_tn": 39.8458,
+      "nav_per_share": 6991,
+      "sbg_price": 3609.0,
+      "discount_pct": 48.4,
+      "arm": 149.11,
+      "sbkk": 218.8,
+      "usdjpy": 159.491
+    },
+    {
+      "date": "2026-04-06",
+      "nav_tn": 39.8133,
+      "nav_per_share": 6986,
+      "sbg_price": 3648.0,
+      "discount_pct": 47.8,
+      "arm": 148.77,
+      "sbkk": 217.1,
+      "usdjpy": 159.78
+    },
+    {
+      "date": "2026-04-07",
+      "nav_tn": 39.149,
+      "nav_per_share": 6869,
+      "sbg_price": 3565.0,
+      "discount_pct": 48.1,
+      "arm": 143.86,
+      "sbkk": 214.7,
+      "usdjpy": 159.683
+    },
+    {
+      "date": "2026-04-08",
+      "nav_tn": 39.6902,
+      "nav_per_share": 6964,
+      "sbg_price": 3822.0,
+      "discount_pct": 45.1,
+      "arm": 148.91,
+      "sbkk": 216.0,
+      "usdjpy": 158.716
+    },
+    {
+      "date": "2026-04-09",
+      "nav_tn": 39.7872,
+      "nav_per_share": 6981,
+      "sbg_price": 3775.0,
+      "discount_pct": 45.9,
+      "arm": 149.795,
+      "sbkk": 215.6,
+      "usdjpy": 158.642
+    },
+    {
+      "date": "2026-04-10",
+      "nav_tn": 39.6743,
+      "nav_per_share": 6961,
+      "sbg_price": 3778.0,
+      "discount_pct": 45.7,
+      "arm": 148.93,
+      "sbkk": 211.2,
+      "usdjpy": 159.112
+    },
+    {
+      "date": "2026-04-13",
+      "nav_tn": 40.9466,
+      "nav_per_share": 7184,
+      "sbg_price": 3764.0,
+      "discount_pct": 47.6,
+      "arm": 157.58,
+      "sbkk": 219.5,
+      "usdjpy": 159.68
+    },
+    {
+      "date": "2026-04-14",
+      "nav_tn": 41.3237,
+      "nav_per_share": 7251,
+      "sbg_price": 4242.0,
+      "discount_pct": 41.5,
+      "arm": 161.22,
+      "sbkk": 217.8,
+      "usdjpy": 159.214
+    },
+    {
+      "date": "2026-04-15",
+      "nav_tn": 41.0739,
+      "nav_per_share": 7207,
+      "sbg_price": 4444.0,
+      "discount_pct": 38.3,
+      "arm": 159.34,
+      "sbkk": 220.8,
+      "usdjpy": 158.792
+    },
+    {
+      "date": "2026-04-16",
+      "nav_tn": 41.4739,
+      "nav_per_share": 7277,
+      "sbg_price": 4672.0,
+      "discount_pct": 35.8,
+      "arm": 162.33,
+      "sbkk": 222.3,
+      "usdjpy": 158.809
+    },
+    {
+      "date": "2026-04-17",
+      "nav_tn": 42.1055,
+      "nav_per_share": 7388,
+      "sbg_price": 4527.0,
+      "discount_pct": 38.7,
+      "arm": 166.73,
+      "sbkk": 224.3,
+      "usdjpy": 159.195
+    },
+    {
+      "date": "2026-04-20",
+      "nav_tn": 43.1387,
+      "nav_per_share": 7569,
+      "sbg_price": 4774.0,
+      "discount_pct": 36.9,
+      "arm": 175.1,
+      "sbkk": 223.0,
+      "usdjpy": 159.161
+    },
+    {
+      "date": "2026-04-21",
+      "nav_tn": 43.1295,
+      "nav_per_share": 7568,
+      "sbg_price": 5181.0,
+      "discount_pct": 31.5,
+      "arm": 175.49,
+      "sbkk": 222.0,
+      "usdjpy": 158.844
+    },
+    {
+      "date": "2026-04-22",
+      "nav_tn": 45.8258,
+      "nav_per_share": 8041,
+      "sbg_price": 5620.0,
+      "discount_pct": 30.1,
+      "arm": 196.57,
+      "sbkk": 219.3,
+      "usdjpy": 159.373
+    },
+    {
+      "date": "2026-04-23",
+      "nav_tn": 46.8564,
+      "nav_per_share": 8221,
+      "sbg_price": 5837.0,
+      "discount_pct": 29.0,
+      "arm": 204.61,
+      "sbkk": 219.0,
+      "usdjpy": 159.488
+    },
+    {
+      "date": "2026-04-24",
+      "nav_tn": 50.7343,
+      "nav_per_share": 8902,
+      "sbg_price": 5963.0,
+      "discount_pct": 33.0,
+      "arm": 234.81,
+      "sbkk": 220.2,
+      "usdjpy": 159.747
+    },
+    {
+      "date": "2026-04-27",
+      "nav_tn": 48.2788,
+      "nav_per_share": 8471,
+      "sbg_price": 5844.0,
+      "discount_pct": 31.0,
+      "arm": 215.88,
+      "sbkk": 218.0,
+      "usdjpy": 159.576
+    },
+    {
+      "date": "2026-04-28",
+      "nav_tn": 46.0853,
+      "nav_per_share": 8086,
+      "sbg_price": 5268.0,
+      "discount_pct": 34.9,
+      "arm": 198.65,
+      "sbkk": 219.3,
+      "usdjpy": 159.357
+    },
+    {
+      "date": "2026-04-29",
+      "nav_tn": 46.5029,
+      "nav_per_share": 8159,
+      "sbg_price": 5268.0,
+      "discount_pct": 35.4,
+      "arm": 201.69,
+      "sbkk": 219.3,
+      "usdjpy": 159.552
+    },
+    {
+      "date": "2026-04-30",
+      "nav_tn": 47.7332,
+      "nav_per_share": 8375,
+      "sbg_price": 5219.0,
+      "discount_pct": 37.7,
+      "arm": 210.32,
+      "sbkk": 221.9,
+      "usdjpy": 160.184
+    },
+    {
+      "date": "2026-05-01",
+      "nav_tn": 47.2878,
+      "nav_per_share": 8297,
+      "sbg_price": 5424.0,
+      "discount_pct": 34.6,
+      "arm": 211.18,
+      "sbkk": 220.6,
+      "usdjpy": 156.978
+    },
+    {
+      "date": "2026-05-04",
+      "nav_tn": 46.2815,
+      "nav_per_share": 8121,
+      "sbg_price": 5424.0,
+      "discount_pct": 33.2,
+      "arm": 203.26,
+      "sbkk": 220.6,
+      "usdjpy": 156.846
+    },
+    {
+      "date": "2026-05-05",
+      "nav_tn": 47.0323,
+      "nav_per_share": 8252,
+      "sbg_price": 5424.0,
+      "discount_pct": 34.3,
+      "arm": 208.84,
+      "sbkk": 220.6,
+      "usdjpy": 157.194
+    },
+    {
+      "date": "2026-05-06",
+      "nav_tn": 50.6659,
+      "nav_per_share": 8890,
+      "sbg_price": 5424.0,
+      "discount_pct": 39.0,
+      "arm": 237.3,
+      "sbkk": 220.6,
+      "usdjpy": 157.677
+    },
+    {
+      "date": "2026-05-07",
+      "nav_tn": 47.4821,
+      "nav_per_share": 8331,
+      "sbg_price": 6424.0,
+      "discount_pct": 22.9,
+      "arm": 213.31,
+      "sbkk": 221.3,
+      "usdjpy": 156.508
+    },
+    {
+      "date": "2026-05-08",
+      "nav_tn": 47.5192,
+      "nav_per_share": 8338,
+      "sbg_price": 6131.0,
+      "discount_pct": 26.5,
+      "arm": 213.27,
+      "sbkk": 220.4,
+      "usdjpy": 156.829
+    },
+    {
+      "date": "2026-05-11",
+      "nav_tn": 47.4653,
+      "nav_per_share": 8328,
+      "sbg_price": 5743.0,
+      "discount_pct": 31.0,
+      "arm": 212.65,
+      "sbkk": 221.8,
+      "usdjpy": 156.858
+    },
+    {
+      "date": "2026-05-12",
+      "nav_tn": 46.9061,
+      "nav_per_share": 8230,
+      "sbg_price": 5987.0,
+      "discount_pct": 27.3,
+      "arm": 207.92,
+      "sbkk": 219.3,
+      "usdjpy": 157.231
+    },
+    {
+      "date": "2026-05-13",
+      "nav_tn": 48.6847,
+      "nav_per_share": 8542,
+      "sbg_price": 6012.0,
+      "discount_pct": 29.6,
+      "arm": 221.21,
+      "sbkk": 222.8,
+      "usdjpy": 157.671
+    },
+    {
+      "date": "2026-05-14",
+      "nav_tn": 49.6149,
+      "nav_per_share": 8706,
+      "sbg_price": 5770.0,
+      "discount_pct": 33.7,
+      "arm": 228.5,
+      "sbkk": 221.9,
+      "usdjpy": 157.851
+    },
+    {
+      "date": "2026-05-15",
+      "nav_tn": 47.3265,
+      "nav_per_share": 8304,
+      "sbg_price": 5745.0,
+      "discount_pct": 30.8,
+      "arm": 209.16,
+      "sbkk": 225.0,
+      "usdjpy": 158.382
+    },
+    {
+      "date": "2026-05-18",
+      "nav_tn": 48.1542,
+      "nav_per_share": 8449,
+      "sbg_price": 5593.0,
+      "discount_pct": 33.8,
+      "arm": 215.12,
+      "sbkk": 225.0,
+      "usdjpy": 158.844
+    },
+    {
+      "date": "2026-05-19",
+      "nav_tn": 49.2261,
+      "nav_per_share": 8637,
+      "sbg_price": 5361.0,
+      "discount_pct": 37.9,
+      "arm": 223.15,
+      "sbkk": 229.3,
+      "usdjpy": 158.861
+    },
+    {
+      "date": "2026-05-20",
+      "nav_tn": 53.4463,
+      "nav_per_share": 9378,
+      "sbg_price": 5039.0,
+      "discount_pct": 46.3,
+      "arm": 256.73,
+      "sbkk": 226.4,
+      "usdjpy": 159.035
+    },
+    {
+      "date": "2026-05-21",
+      "nav_tn": 58.6129,
+      "nav_per_share": 10284,
+      "sbg_price": 6039.0,
+      "discount_pct": 41.3,
+      "arm": 298.23,
+      "sbkk": 224.5,
+      "usdjpy": 158.888
+    },
+    {
+      "date": "2026-05-22",
+      "nav_tn": 59.6662,
+      "nav_per_share": 10469,
+      "sbg_price": 6757.0,
+      "discount_pct": 35.5,
+      "arm": 306.51,
+      "sbkk": 223.0,
+      "usdjpy": 159.018
+    },
+    {
+      "date": "2026-05-25",
+      "nav_tn": 59.5758,
+      "nav_per_share": 10453,
+      "sbg_price": 7070.0,
+      "discount_pct": 32.4,
+      "arm": 306.51,
+      "sbkk": 217.6,
+      "usdjpy": 158.946
+    },
+    {
+      "date": "2026-05-26",
+      "nav_tn": 61.4146,
+      "nav_per_share": 10776,
+      "sbg_price": 7841.0,
+      "discount_pct": 27.2,
+      "arm": 321.22,
+      "sbkk": 216.5,
+      "usdjpy": 158.954
+    },
+    {
+      "date": "2026-05-27",
+      "nav_tn": 59.1835,
+      "nav_per_share": 10385,
+      "sbg_price": 7272.0,
+      "discount_pct": 30.0,
+      "arm": 302.71,
+      "sbkk": 218.7,
+      "usdjpy": 159.243
+    },
+    {
+      "date": "2026-05-28",
+      "nav_tn": 63.3581,
+      "nav_per_share": 11117,
+      "sbg_price": 7125.0,
+      "discount_pct": 35.9,
+      "arm": 335.27,
+      "sbkk": 217.4,
+      "usdjpy": 159.568
+    },
+    {
+      "date": "2026-05-29",
+      "nav_tn": 65.5232,
+      "nav_per_share": 11497,
+      "sbg_price": 7491.0,
+      "discount_pct": 34.8,
+      "arm": 353.29,
+      "sbkk": 215.3,
+      "usdjpy": 159.27
+    },
+    {
+      "date": "2026-06-01",
+      "nav_tn": 72.5687,
+      "nav_per_share": 12733,
+      "sbg_price": 8541.0,
+      "discount_pct": 32.9,
+      "arm": 408.85,
+      "sbkk": 216.1,
+      "usdjpy": 159.353
+    },
+    {
+      "date": "2026-06-02",
+      "nav_tn": 71.9049,
+      "nav_per_share": 12617,
+      "sbg_price": 8632.0,
+      "discount_pct": 31.6,
+      "arm": 402.71,
+      "sbkk": 217.6,
+      "usdjpy": 159.636
+    },
+    {
+      "date": "2026-06-03",
+      "nav_tn": 73.1794,
+      "nav_per_share": 12840,
+      "sbg_price": 8315.0,
+      "discount_pct": 35.2,
+      "arm": 411.83,
+      "sbkk": 218.7,
+      "usdjpy": 159.968
+    },
+    {
+      "date": "2026-06-04",
+      "nav_tn": 70.775,
+      "nav_per_share": 12419,
+      "sbg_price": 7377.0,
+      "discount_pct": 40.6,
+      "arm": 393.44,
+      "sbkk": 213.9,
+      "usdjpy": 159.94
+    },
+    {
+      "date": "2026-06-05",
+      "nav_tn": 64.3613,
+      "nav_per_share": 11293,
+      "sbg_price": 7426.0,
+      "discount_pct": 34.2,
+      "arm": 342.93,
+      "sbkk": 211.7,
+      "usdjpy": 159.99
+    },
+    {
+      "date": "2026-06-08",
+      "nav_tn": 64.9207,
+      "nav_per_share": 11391,
+      "sbg_price": 6976.0,
+      "discount_pct": 38.8,
+      "arm": 346.39,
+      "sbkk": 213.8,
+      "usdjpy": 160.327
+    },
+    {
+      "date": "2026-06-09",
+      "nav_tn": 62.1168,
+      "nav_per_share": 10899,
+      "sbg_price": 7048.0,
+      "discount_pct": 35.3,
+      "arm": 324.86,
+      "sbkk": 211.5,
+      "usdjpy": 160.174
+    },
+    {
+      "date": "2026-06-10",
+      "nav_tn": 60.003,
+      "nav_per_share": 10528,
+      "sbg_price": 6461.0,
+      "discount_pct": 38.6,
+      "arm": 307.43,
+      "sbkk": 214.8,
+      "usdjpy": 160.384
+    },
+    {
+      "date": "2026-06-11",
+      "nav_tn": 64.4647,
+      "nav_per_share": 11311,
+      "sbg_price": 6374.0,
+      "discount_pct": 43.6,
+      "arm": 342.23,
+      "sbkk": 215.0,
+      "usdjpy": 160.527
+    },
+    {
+      "date": "2026-06-12",
+      "nav_tn": 69.23,
+      "nav_per_share": 12147,
+      "sbg_price": 6472.0,
+      "discount_pct": 46.7,
+      "arm": 380.81,
+      "sbkk": 213.5,
+      "usdjpy": 160.13
+    },
+    {
+      "date": "2026-06-13",
+      "nav_tn": 69.2466,
+      "nav_per_share": 12150,
+      "sbg_price": 6472.0,
+      "discount_pct": 46.7,
+      "arm": 380.81,
+      "sbkk": 213.5,
+      "usdjpy": 160.185
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "mar31",
+      "date": "2026-03-31",
+      "arm_tn": 19.15,
+      "sbkk_tn": 2.85,
+      "tmus_tn": 0.05,
+      "svf2_tn": 17.19,
+      "svf1_tn": 3.38,
+      "latam_tn": 1.04,
+      "other_tn": 4.61,
+      "net_debt_tn": 8.21,
+      "holdings_tn": 48.27,
+      "nav_tn": 40.06,
+      "nav_per_share": 7029,
+      "sbg_price": 3555.0
+    },
+    {
+      "label": "may12",
+      "date": "2026-05-12",
+      "arm_tn": 25.8901,
+      "sbkk_tn": 2.9607,
+      "tmus_tn": 0.0453,
+      "svf2_tn": 17.19,
+      "svf1_tn": 3.38,
+      "latam_tn": 1.04,
+      "other_tn": 4.61,
+      "net_debt_tn": 8.21,
+      "holdings_tn": 55.1161,
+      "nav_tn": 46.9061,
+      "nav_per_share": 8230,
+      "sbg_price": 5987.0
+    },
+    {
+      "label": "latest",
+      "date": "2026-06-13",
+      "arm_tn": 48.3091,
+      "sbkk_tn": 2.8824,
+      "tmus_tn": 0.0451,
+      "svf2_tn": 17.19,
+      "svf1_tn": 3.38,
+      "latam_tn": 1.04,
+      "other_tn": 4.61,
+      "net_debt_tn": 8.21,
+      "holdings_tn": 77.4566,
+      "nav_tn": 69.2466,
+      "nav_per_share": 12150,
+      "sbg_price": 6472.0
+    }
+  ],
+  "official_points": [
+    {
+      "date": "2026-03-31",
+      "nav_per_share": 7029,
+      "label": "公式確定NAV(①-a)",
+      "total_tn": 40.06
+    },
+    {
+      "date": "2026-05-12",
+      "nav_per_share": 8370,
+      "label": "公式参考NAV(①-b)",
+      "total_tn": 47.7
+    }
+  ],
+  "timeseries_generated_at": "2026-06-13T02:32:19Z",
+  "timeseries_base": {
+    "as_of": "2026-03-31",
+    "arm_price_usd": 151.27999877929688,
+    "sbkk_price_jpy": 211.10000610351562,
+    "tmus_price_usd": 210.02999877929688,
+    "usdjpy": 159.84100341796875,
+    "arm_value_tn": 19.15,
+    "sbkk_value_tn": 2.85,
+    "tmus_value_tn": 0.05,
+    "unlisted_tn": 26.22,
+    "net_debt_tn": 8.21,
+    "shares": 5698923701
+  }
+}

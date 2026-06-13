@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-03-31",
+  "source": "https://group.softbank/ir/stock/sotp",
+  "official_nav_per_share_jpy": 7029,
+  "nav_total_tn": 40.06,
+  "holdings_total_jpy_tn": 48.26,
+  "net_debt_jpy_tn": 8.21,
+  "shares_outstanding": 5698923701,
+  "note": "SBG公式SOTPの四半期末値。次回決算発表時に手動更新する。",
+  "as_of_fx_usdjpy": 159.841,
+  "components": {
+    "listed": {
+      "arm":  {"value_tn_jpy": 19.15, "price_asof": 151.28, "currency": "USD"},
+      "sbkk": {"value_tn_jpy": 2.85,  "price_asof": 211.10, "currency": "JPY"},
+      "tmus": {"value_tn_jpy": 0.05,  "price_asof": 210.03, "currency": "USD"}
+    },
+    "unlisted_total_tn_jpy": 26.22,
+    "net_debt_tn_jpy": 8.21
+  },
+  "official_b": {
+    "nav_per_share_jpy": 8370,
+    "total_tn": 47.7,
+    "as_of": "2026-05-12",
+    "source": "https://ai.softbank/insights/022/",
+    "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
+  },
+  "openai": {
+    "sbg_stake_value_usd_bn": 79.6,
+    "sbg_stake_value_as_of": "2026-03-31",
+    "company_valuation_usd_bn": 852.0,
+    "company_valuation_as_of": "2026-03-31",
+    "company_valuation_note": "2026年3月31日完了ラウンドのポストマネー評価額",
+    "trend_note": "SBG初出資時（約2,600億ドル）から約3.3倍に成長",
+    "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
+  }
+}

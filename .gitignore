@@ -1,0 +1,15 @@
+# 引継ぎ・作業メモ
+handover_sbg_nav.txt
+
+# Claude Code 設定
+.claude/
+
+# アンダースコア始まりの補助・デバッグスクリプト
+_*.py
+
+# デバッグ用スクリプト
+test_fetch.py
+
+# Python キャッシュ
+__pycache__/
+*.pyc
