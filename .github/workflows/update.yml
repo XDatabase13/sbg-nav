@@ -10,6 +10,11 @@ on:
     - cron: '30 22 * * *'
   workflow_dispatch: # 手動実行も可
 
+# 複数cronが同時発火したとき直列化してpush conflictを防ぐ
+concurrency:
+  group: update-nav-data
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -41,6 +46,7 @@ jobs:
           # それ以外の差分（株価・NAV・為替）がある場合のみコミットする。
           if git diff --staged -- data.json | grep -v '"generated_at"' | grep -qE '^\+[^+]|^-[^-]'; then
             git commit -m "Auto-update: data.json $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+            git pull --rebase origin master
             git push
           else
             echo "市場データに変更なし（generated_at のみ）。スキップ。"
