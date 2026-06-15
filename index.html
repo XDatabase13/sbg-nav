@@ -207,6 +207,18 @@ td.dt { font-family: var(--mono); color: var(--dim); font-size: .76rem; }
 .future-title { font-size: .96rem; font-weight: 700; margin-bottom: 8px; }
 .future-desc { font-size: .81rem; color: var(--sub); line-height: 1.8; }
 
+/* ── Site Nav（回遊リンク）──
+   今後ページが増えたらヘッダー内・フッター内の site-nav に <a> を追加するだけでOK */
+.site-nav {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px;
+  margin-top: 12px;
+  font-family: var(--mono); font-size: .7rem;
+  color: var(--dim);
+}
+.site-nav-label { color: var(--accent); font-weight: 700; }
+.site-nav a { color: var(--sub); }
+.site-nav a:hover { color: var(--ink); text-decoration: underline; }
+
 /* ── Footer ───────────────────────────────────── */
 footer { margin-top: 44px; padding: 22px 0 40px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--dim); line-height: 1.85; }
 .disclaimer { background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; color: var(--sub); font-size: .78rem; }
@@ -223,6 +235,12 @@ footer a { color: var(--sub); }
 <header>
   <div class="kicker">SoftBank Group NAV Monitor</div>
   <h1>SBG 理論株価モニター<span class="code">TSE:9984</span></h1>
+  <!-- 回遊リンク①：タイトル直下 / 今後ページが増えたらここに <a> を追加 -->
+  <nav class="site-nav">
+    <span class="site-nav-label">数理投資情報部の他の分析 ▶</span>
+    <a href="https://xdbdb.com/crypto-nav/">暗号通貨トレジャリー企業 mNAVモニター</a>
+    <a href="https://xdbdb.com/">トップ</a>
+  </nav>
   <p class="tagline">ソフトバンクグループのNAV（時価純資産）に基づく理論株価と実株価とのディスカウント率を提供します。計算過程・データ源・基準時刻もすべて提示します。</p>
   <div class="header-meta">
     <span><b>生成:</b> <span id="gen-at">—</span></span>
@@ -454,6 +472,12 @@ footer a { color: var(--sub); }
 
 <!-- ⑩  FOOTER ─────────────────────────────────────────────────────────────── -->
 <footer>
+  <!-- 回遊リンク②：免責事項の上 / 今後ページが増えたらここに <a> を追加 -->
+  <nav class="site-nav" style="margin-bottom:16px;margin-top:0">
+    <span class="site-nav-label">数理投資情報部の他の分析 ▶</span>
+    <a href="https://xdbdb.com/crypto-nav/">暗号通貨トレジャリー企業 mNAVモニター</a>
+    <a href="https://xdbdb.com/">トップ</a>
+  </nav>
   <div class="disclaimer">
     本サイトは公開データに基づく数理的な試算です。投資勧誘・投資助言を目的とするものではありません。掲載値の正確性・完全性を保証するものではなく、投資判断はご自身の責任で行ってください。
   </div>
