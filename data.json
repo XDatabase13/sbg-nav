@@ -1,39 +1,39 @@
 {
-  "generated_at": "2026-06-15T17:37:58Z",
+  "generated_at": "2026-06-15T20:51:48Z",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 409.3699,
+      "close": 412.55,
       "prev_close": 380.81,
       "date": "2026-06-15",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 189.1,
+      "close": 188.86,
       "prev_close": 189.1,
       "date": "2026-06-15",
       "status": "ok"
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 213.5,
-      "prev_close": 215.0,
-      "date": "2026-06-12",
+      "close": 210.2,
+      "prev_close": 213.5,
+      "date": "2026-06-15",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 6472.0,
-      "prev_close": 6374.0,
-      "date": "2026-06-12",
+      "close": 7139.0,
+      "prev_close": 6472.0,
+      "date": "2026-06-15",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 160.257,
+      "close": 160.349,
       "prev_close": 160.13,
       "date": "2026-06-15",
       "status": "ok"
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 12790,
-      "nav_tn": 72.8931,
-      "sbg_price_jpy": 6472.0,
-      "discount_pct": 49.4
+      "nav_per_share_jpy": 12858,
+      "nav_tn": 73.2822,
+      "sbg_price_jpy": 7139.0,
+      "discount_pct": 44.5
     },
     "official_nav_per_share_jpy": 7029,
-    "sbg_actual_price_jpy": 6472.0,
-    "discount_pct": 7.9,
-    "semi_nav_per_share_jpy": 12790,
-    "semi_discount_pct": 49.4
+    "sbg_actual_price_jpy": 7139.0,
+    "discount_pct": -1.6,
+    "semi_nav_per_share_jpy": 12858,
+    "semi_discount_pct": 44.5
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 51.9556,
-    "sbkk_value_tn_jpy": 2.8824,
+    "arm_value_tn_jpy": 52.3892,
+    "sbkk_value_tn_jpy": 2.8378,
     "tmus_value_tn_jpy": 0.0451,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 81.1031,
+    "holdings_total_tn_jpy": 81.4922,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 72.8931
+    "semi_nav_tn_jpy": 73.2822
   },
   "official": {
     "as_of": "2026-03-31",
