@@ -210,14 +210,28 @@ td.dt { font-family: var(--mono); color: var(--dim); font-size: .76rem; }
 /* ── Site Nav（回遊リンク）──
    今後ページが増えたらヘッダー内・フッター内の site-nav に <a> を追加するだけでOK */
 .site-nav {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px;
-  margin-top: 12px;
-  font-family: var(--mono); font-size: .7rem;
-  color: var(--dim);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-top: 14px;
+  font-family: var(--mono);
 }
-.site-nav-label { color: var(--accent); font-weight: 700; }
-.site-nav a { color: var(--sub); }
-.site-nav a:hover { color: var(--ink); text-decoration: underline; }
+.site-nav-label {
+  font-size: .72rem; font-weight: 700; color: var(--sub);
+  margin-right: 2px;
+}
+.site-nav a {
+  font-size: .78rem;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 12px;
+  text-decoration: none;
+}
+.site-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
 
 /* ── Footer ───────────────────────────────────── */
 footer { margin-top: 44px; padding: 22px 0 40px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--dim); line-height: 1.85; }
