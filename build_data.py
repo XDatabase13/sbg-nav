@@ -117,9 +117,26 @@ def validate(key: str, new: dict, prev_market: dict) -> tuple:
     return new, "ok"
 
 
-# ── 公式NAV読み込み ──────────────────────────────────────────────────────────
+# ── 公式NAV読み込み（epochs配列＋_meta構造） ─────────────────────────────────
 with open(OFFICIAL_PATH, encoding="utf-8") as f:
-    official = json.load(f)
+    _nav_file = json.load(f)
+
+nav_epochs = _nav_file["epochs"]
+nav_meta   = _nav_file["_meta"]
+
+
+def resolve_nav_epoch(nav_epochs: list, date_str: str) -> dict | None:
+    """valid_from <= date_str を満たす最新エポックを返す。"""
+    valid = [e for e in nav_epochs if e["valid_from"] <= date_str]
+    if not valid:
+        return None
+    return max(valid, key=lambda e: e["valid_from"])
+
+
+_today_str = _date.today().isoformat()
+cur_epoch  = resolve_nav_epoch(nav_epochs, _today_str)
+if cur_epoch is None:
+    raise ValueError(f"有効なepochが見つかりません (today={_today_str})")
 
 # ── 既存 data.json 読み込み（フォールバック用 & timeseries等保持用） ────────────
 existing    = {}
@@ -152,24 +169,24 @@ else:
     overall_status = "partial"
 
 # ── ①-a 公式確定NAV ─────────────────────────────────────────────────────────
-official_nav_per_share = official["official_nav_per_share_jpy"]
+official_nav_per_share = cur_epoch["official_nav_per_share_jpy"]
 sbg_price = market["sbg"]["close"]
 
 official_a = {
     "nav_per_share_jpy": official_nav_per_share,
-    "total_tn":          official.get(
+    "total_tn":          cur_epoch.get(
                              "nav_total_tn",
-                             round(official["holdings_total_jpy_tn"] - official["net_debt_jpy_tn"], 4),
+                             round(cur_epoch["holdings_total_jpy_tn"] - cur_epoch["net_debt_jpy_tn"], 4),
                          ),
-    "as_of":             official["as_of"],
+    "as_of":             cur_epoch["as_of"],
 }
 
 discount_official = round((1 - sbg_price / official_nav_per_share) * 100, 1) if sbg_price else None
 
 # ── ② リアルタイムNAV計算 ───────────────────────────────────────────────────
-comp    = official["components"]
+comp    = cur_epoch["components"]
 listed  = comp["listed"]
-fx_asof = official["as_of_fx_usdjpy"]
+fx_asof = cur_epoch["as_of_fx_usdjpy"]
 fx_now  = market["usdjpy"]["close"]
 
 def semi_value(key):
@@ -188,7 +205,7 @@ tmus_val = semi_value("tmus")
 if None not in (arm_val, sbkk_val, tmus_val, fx_now):
     unlisted = comp["unlisted_total_tn_jpy"]
     net_debt = comp["net_debt_tn_jpy"]
-    shares   = official["shares_outstanding"]
+    shares   = cur_epoch["shares_outstanding"]
 
     holdings_tn        = arm_val + sbkk_val + tmus_val + unlisted
     semi_nav_tn        = holdings_tn - net_debt
@@ -218,7 +235,7 @@ output = {
     "market":         market,
     "nav": {
         "official_a": official_a,
-        "official_b": official.get("official_b"),
+        "official_b": nav_meta.get("official_b"),
         "semi": {
             "nav_per_share_jpy": semi_nav_per_share,
             "nav_tn":            round(semi_nav_tn, 4) if semi_nav_tn else None,
@@ -231,9 +248,9 @@ output = {
         "semi_nav_per_share_jpy":     semi_nav_per_share,
         "semi_discount_pct":          semi_discount_pct,
     },
-    "openai":        official.get("openai"),
+    "openai":        nav_meta.get("openai"),
     "nav_breakdown": nav_breakdown,
-    "official":      official,
+    "official":      {**cur_epoch},
     # timeseries系は build_history.py が生成するためそのまま保持
     "timeseries":              existing.get("timeseries"),
     "snapshots":               existing.get("snapshots"),

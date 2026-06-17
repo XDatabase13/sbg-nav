@@ -2,38 +2,34 @@ import sys
 import json
 import yfinance as yf
 import pandas as pd
-from datetime import datetime, timezone, date as _date
+from datetime import datetime, timezone, date as _date, timedelta
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-OUTPUT_PATH  = "data.json"
-BASE_DATE    = "2026-03-31"
-START_FETCH  = "2026-03-28"   # 3/31を確実に含むよう少し前から
-TODAY        = _date.today().strftime("%Y-%m-%d")
-TICKERS      = ["ARM", "9434.T", "9984.T", "USDJPY=X", "TMUS"]
+OUTPUT_PATH   = "data.json"
+OFFICIAL_PATH = "official_nav.json"
+TICKERS       = ["ARM", "9434.T", "9984.T", "USDJPY=X", "TMUS"]
 
-# 固定パラメータ（3月末公式値）
-BASE_ARM_VALUE_TN   = 19.15
-BASE_SBKK_VALUE_TN  = 2.85
-BASE_TMUS_VALUE_TN  = 0.05
-UNLISTED_TN         = 26.22   # SVF1+SVF2+LatAm+その他 合計（全期間固定）
-NET_DEBT_TN         = 8.21
-SHARES              = 5_698_923_701
+# ── 公式NAV（epochs配列）読み込み ────────────────────────────────────────────
+with open(OFFICIAL_PATH, encoding="utf-8") as f:
+    _nav_file = json.load(f)
 
-UNLISTED_BREAKDOWN = {
-    "svf2_tn":  17.19,
-    "svf1_tn":   3.38,
-    "latam_tn":  1.04,
-    "other_tn":  4.61,
-}
+nav_epochs = _nav_file["epochs"]
 
-# フォールバック基準値（実取得できなかった場合）
-FALLBACK = {
-    "ARM":      151.0,
-    "9434.T":   211.1,
-    "USDJPY=X": 159.88,
-    "TMUS":     210.03,
-}
+
+def resolve_nav_epoch(nav_epochs: list, date_str: str) -> dict | None:
+    """valid_from <= date_str を満たす最新エポックを返す。"""
+    valid = [e for e in nav_epochs if e["valid_from"] <= date_str]
+    if not valid:
+        return None
+    return max(valid, key=lambda e: e["valid_from"])
+
+
+# ── 日付範囲をepochsから導出 ──────────────────────────────────────────────────
+_first_date = min(_date.fromisoformat(e["valid_from"]) for e in nav_epochs)
+BASE_DATE   = _first_date.isoformat()
+START_FETCH = (_first_date - timedelta(days=3)).isoformat()
+TODAY       = _date.today().strftime("%Y-%m-%d")
 
 # ── データ取得 ────────────────────────────────────────────────────────────────
 print(f"yfinance 取得中: {START_FETCH} → {TODAY} ...")
@@ -44,26 +40,45 @@ close = raw["Close"].copy()
 close = close.ffill()
 close = close.dropna(how="all")
 
-# ── 3月末基準値を実取得 ───────────────────────────────────────────────────────
-def get_base(ticker: str) -> tuple[float, str]:
-    rows = close[close.index.strftime("%Y-%m-%d") == BASE_DATE]
+
+# ── エポック別基準値の確定（実取得 or price_asofへのフォールバック） ──────────
+def _pick_base(date_str: str, ticker: str, fallback: float) -> tuple[float, str]:
+    """指定日付の終値を取得し、失敗時はfallbackを返す。"""
+    rows = close[close.index.strftime("%Y-%m-%d") == date_str]
     if not rows.empty:
         v = rows[ticker].iloc[0]
         if pd.notna(v):
             return float(v), "実取得"
-    return FALLBACK[ticker], "フォールバック"
+    return fallback, "フォールバック"
 
-base = {}
-print(f"\n▼ 3月末基準値")
-for t in ["ARM", "9434.T", "USDJPY=X", "TMUS"]:
-    v, src = get_base(t)
-    base[t] = v
-    fb = FALLBACK[t]
-    diff = f"  ← 指定値 {fb} と差: {v - fb:+.4f}" if abs(v - fb) > 0.001 else f"  (指定値 {fb} と一致)"
-    print(f"  {t:12s} {v:.4f}  [{src}]{diff}")
+
+epoch_bases: dict[str, dict[str, float]] = {}
+
+print("\n▼ エポック別基準値")
+for e in nav_epochs:
+    vf     = e["valid_from"]
+    listed = e["components"]["listed"]
+    fb_fx  = e["as_of_fx_usdjpy"]
+
+    arm_b,  arm_src  = _pick_base(vf, "ARM",      listed["arm"]["price_asof"])
+    sbkk_b, sbkk_src = _pick_base(vf, "9434.T",   listed["sbkk"]["price_asof"])
+    tmus_b, tmus_src = _pick_base(vf, "TMUS",     listed["tmus"]["price_asof"])
+    fx_b,   fx_src   = _pick_base(vf, "USDJPY=X", fb_fx)
+
+    epoch_bases[vf] = {
+        "ARM":      arm_b,
+        "9434.T":   sbkk_b,
+        "TMUS":     tmus_b,
+        "USDJPY=X": fx_b,
+    }
+    print(f"  [{vf}]  ARM ${arm_b:.4f}[{arm_src}]  "
+          f"SBKK ¥{sbkk_b:.2f}[{sbkk_src}]  "
+          f"TMUS ${tmus_b:.4f}[{tmus_src}]  "
+          f"USDJPY {fx_b:.4f}[{fx_src}]")
+
 
 # ── 1日分の②NAV計算 ──────────────────────────────────────────────────────────
-def calc_nav(row) -> dict | None:
+def calc_nav(row, epoch: dict) -> dict | None:
     arm_p    = row["ARM"]
     sbkk_p   = row["9434.T"]
     tmus_p   = row["TMUS"]
@@ -73,13 +88,19 @@ def calc_nav(row) -> dict | None:
     if any(pd.isna(v) for v in [arm_p, sbkk_p, tmus_p, usdjpy_p]):
         return None
 
-    arm_val  = BASE_ARM_VALUE_TN  * (float(arm_p)  / base["ARM"])      * (float(usdjpy_p) / base["USDJPY=X"])
-    sbkk_val = BASE_SBKK_VALUE_TN * (float(sbkk_p) / base["9434.T"])
-    tmus_val = BASE_TMUS_VALUE_TN * (float(tmus_p) / base["TMUS"])     * (float(usdjpy_p) / base["USDJPY=X"])
+    listed      = epoch["components"]["listed"]
+    base        = epoch_bases[epoch["valid_from"]]
+    unlisted_tn = epoch["components"]["unlisted_total_tn_jpy"]
+    net_debt_tn = epoch["components"]["net_debt_tn_jpy"]
+    shares      = epoch["shares_outstanding"]
 
-    holdings      = arm_val + sbkk_val + tmus_val + UNLISTED_TN
-    nav_tn        = holdings - NET_DEBT_TN
-    nav_per_share = int(nav_tn * 1e12 / SHARES)
+    arm_val  = listed["arm"]["value_tn_jpy"]  * (float(arm_p)  / base["ARM"])      * (float(usdjpy_p) / base["USDJPY=X"])
+    sbkk_val = listed["sbkk"]["value_tn_jpy"] * (float(sbkk_p) / base["9434.T"])
+    tmus_val = listed["tmus"]["value_tn_jpy"] * (float(tmus_p) / base["TMUS"])     * (float(usdjpy_p) / base["USDJPY=X"])
+
+    holdings      = arm_val + sbkk_val + tmus_val + unlisted_tn
+    nav_tn        = holdings - net_debt_tn
+    nav_per_share = int(nav_tn * 1e12 / shares)
     discount_pct  = (
         round((1 - float(sbg_p) / nav_per_share) * 100, 1)
         if pd.notna(sbg_p) and nav_per_share else None
@@ -95,17 +116,23 @@ def calc_nav(row) -> dict | None:
         "holdings_tn":   round(holdings, 4),
     }
 
+
 # ── timeseries 生成 ───────────────────────────────────────────────────────────
 series = []
 for dt in close.index:
-    if dt.strftime("%Y-%m-%d") < BASE_DATE:
+    date_str = dt.strftime("%Y-%m-%d")
+    if date_str < BASE_DATE:
+        continue
+    epoch = resolve_nav_epoch(nav_epochs, date_str)
+    if epoch is None:
         continue
     row    = close.loc[dt]
-    result = calc_nav(row)
+    result = calc_nav(row, epoch)
     if result is None:
         continue
     series.append({
-        "date":          dt.strftime("%Y-%m-%d"),
+        "date":          date_str,
+        "nav_epoch":     epoch["valid_from"],
         "nav_tn":        result["nav_tn"],
         "nav_per_share": result["nav_per_share"],
         "sbg_price":     round(float(row["9984.T"]), 2) if pd.notna(row["9984.T"]) else None,
@@ -115,29 +142,36 @@ for dt in close.index:
         "usdjpy":        round(float(row["USDJPY=X"]), 4),
     })
 
+
 # ── スナップショット生成（円グラフ用） ────────────────────────────────────────
 def make_snapshot(label: str, target_date: str) -> dict | None:
     candidates = close[close.index.strftime("%Y-%m-%d") >= target_date]
     if candidates.empty:
         return None
-    dt  = candidates.index[0]
-    row = candidates.iloc[0]
-    r   = calc_nav(row)
+    dt    = candidates.index[0]
+    row   = candidates.iloc[0]
+    d_str = dt.strftime("%Y-%m-%d")
+    epoch = resolve_nav_epoch(nav_epochs, d_str)
+    if epoch is None:
+        return None
+    r = calc_nav(row, epoch)
     if r is None:
         return None
+    bd = epoch["components"].get("unlisted_breakdown", {})
     return {
         "label":         label,
-        "date":          dt.strftime("%Y-%m-%d"),
+        "date":          d_str,
         "arm_tn":        r["arm_val_tn"],
         "sbkk_tn":       r["sbkk_val_tn"],
         "tmus_tn":       r["tmus_val_tn"],
-        **UNLISTED_BREAKDOWN,
-        "net_debt_tn":   NET_DEBT_TN,
+        **bd,
+        "net_debt_tn":   epoch["components"]["net_debt_tn_jpy"],
         "holdings_tn":   r["holdings_tn"],
         "nav_tn":        r["nav_tn"],
         "nav_per_share": r["nav_per_share"],
         "sbg_price":     round(float(row["9984.T"]), 2) if pd.notna(row["9984.T"]) else None,
     }
+
 
 latest_date = series[-1]["date"] if series else TODAY
 snapshots = [
@@ -147,41 +181,49 @@ snapshots = [
 ]
 snapshots = [s for s in snapshots if s is not None]
 
+
 # ── data.json に書き込み ──────────────────────────────────────────────────────
 with open(OUTPUT_PATH, encoding="utf-8") as f:
     data = json.load(f)
+
+_base_epoch = next(e for e in nav_epochs if e["valid_from"] == BASE_DATE)
+_base_b     = epoch_bases[BASE_DATE]
 
 data["timeseries"]              = series
 data["snapshots"]               = snapshots
 data["timeseries_generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 data["timeseries_base"]         = {
     "as_of":          BASE_DATE,
-    "arm_price_usd":  base["ARM"],
-    "sbkk_price_jpy": base["9434.T"],
-    "tmus_price_usd": base["TMUS"],
-    "usdjpy":         base["USDJPY=X"],
-    "arm_value_tn":   BASE_ARM_VALUE_TN,
-    "sbkk_value_tn":  BASE_SBKK_VALUE_TN,
-    "tmus_value_tn":  BASE_TMUS_VALUE_TN,
-    "unlisted_tn":    UNLISTED_TN,
-    "net_debt_tn":    NET_DEBT_TN,
-    "shares":         SHARES,
+    "arm_price_usd":  _base_b["ARM"],
+    "sbkk_price_jpy": _base_b["9434.T"],
+    "tmus_price_usd": _base_b["TMUS"],
+    "usdjpy":         _base_b["USDJPY=X"],
+    "arm_value_tn":   _base_epoch["components"]["listed"]["arm"]["value_tn_jpy"],
+    "sbkk_value_tn":  _base_epoch["components"]["listed"]["sbkk"]["value_tn_jpy"],
+    "tmus_value_tn":  _base_epoch["components"]["listed"]["tmus"]["value_tn_jpy"],
+    "unlisted_tn":    _base_epoch["components"]["unlisted_total_tn_jpy"],
+    "net_debt_tn":    _base_epoch["components"]["net_debt_tn_jpy"],
+    "shares":         _base_epoch["shares_outstanding"],
 }
 
 with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
+
 # ── 確認表示 ──────────────────────────────────────────────────────────────────
 print(f"\n✓ {len(series)} 営業日分 → {OUTPUT_PATH} に保存")
+
 
 def show_rows(label: str, rows: list):
     print(f"\n▼ {label}")
     for r in rows:
-        d = r.get("discount_pct")
-        print(f"  {r['date']}  NAV {r['nav_tn']}兆  "
+        d  = r.get("discount_pct")
+        ep = r.get("nav_epoch", "?")
+        print(f"  {r['date']}  epoch:{ep}  NAV {r['nav_tn']}兆  "
               f"理想株価 ¥{r['nav_per_share']:,}  "
               f"SBG ¥{r.get('sbg_price') or 0:,.0f}  "
               f"DIS {d}%  ARM ${r['arm']}")
+
 
 show_rows("先頭 3件", series[:3])
 show_rows("5/12 付近", [r for r in series if "2026-05-09" <= r["date"] <= "2026-05-14"])
