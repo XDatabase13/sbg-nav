@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T22:40:45Z",
+  "generated_at": "2026-06-17T12:34:54Z",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
@@ -19,23 +19,23 @@
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 211.6,
-      "prev_close": 210.2,
-      "date": "2026-06-16",
+      "close": 210.1,
+      "prev_close": 211.6,
+      "date": "2026-06-17",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 7102.0,
-      "prev_close": 7139.0,
-      "date": "2026-06-16",
+      "close": 6880.0,
+      "prev_close": 7102.0,
+      "date": "2026-06-17",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 160.418,
-      "prev_close": 159.955,
-      "date": "2026-06-16",
+      "close": 160.29,
+      "prev_close": 160.229,
+      "date": "2026-06-17",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 12504,
-      "nav_tn": 71.2632,
-      "sbg_price_jpy": 7102.0,
-      "discount_pct": 43.2
+      "nav_per_share_jpy": 12494,
+      "nav_tn": 71.2027,
+      "sbg_price_jpy": 6880.0,
+      "discount_pct": 44.9
     },
     "official_nav_per_share_jpy": 7029,
-    "sbg_actual_price_jpy": 7102.0,
-    "discount_pct": -1.0,
-    "semi_nav_per_share_jpy": 12504,
-    "semi_discount_pct": 43.2
+    "sbg_actual_price_jpy": 6880.0,
+    "discount_pct": 2.1,
+    "semi_nav_per_share_jpy": 12494,
+    "semi_discount_pct": 44.9
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 50.3524,
-    "sbkk_value_tn_jpy": 2.8568,
+    "arm_value_tn_jpy": 50.3122,
+    "sbkk_value_tn_jpy": 2.8365,
     "tmus_value_tn_jpy": 0.044,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 79.4732,
+    "holdings_total_tn_jpy": 79.4127,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 71.2632
+    "semi_nav_tn_jpy": 71.2027
   },
   "official": {
     "as_of": "2026-03-31",
