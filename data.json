@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-06-17T13:20:40Z",
+  "generated_at": "2026-06-18T05:30:40+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 396.34,
-      "prev_close": 412.55,
-      "date": "2026-06-16",
+      "close": 418.88,
+      "prev_close": 396.34,
+      "date": "2026-06-17",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 184.36,
-      "prev_close": 188.86,
-      "date": "2026-06-16",
+      "close": 181.31,
+      "prev_close": 184.36,
+      "date": "2026-06-17",
       "status": "ok"
     },
     "sbkk": {
@@ -33,7 +33,7 @@
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 160.259,
+      "close": 160.683,
       "prev_close": 160.229,
       "date": "2026-06-17",
       "status": "ok"
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 12492,
-      "nav_tn": 71.193,
+      "nav_per_share_jpy": 13018,
+      "nav_tn": 74.1937,
       "sbg_price_jpy": 6880.0,
-      "discount_pct": 44.9
+      "discount_pct": 47.2
     },
     "official_nav_per_share_jpy": 7029,
     "sbg_actual_price_jpy": 6880.0,
     "discount_pct": 2.1,
-    "semi_nav_per_share_jpy": 12492,
-    "semi_discount_pct": 44.9
+    "semi_nav_per_share_jpy": 13018,
+    "semi_discount_pct": 47.2
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 50.3025,
+    "arm_value_tn_jpy": 53.3039,
     "sbkk_value_tn_jpy": 2.8365,
-    "tmus_value_tn_jpy": 0.044,
+    "tmus_value_tn_jpy": 0.0434,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 79.403,
+    "holdings_total_tn_jpy": 82.4037,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 71.193
+    "semi_nav_tn_jpy": 74.1937
   },
   "official": {
     "as_of": "2026-03-31",
