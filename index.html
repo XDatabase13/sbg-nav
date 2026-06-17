@@ -536,7 +536,12 @@ footer a { color: var(--sub); }
 
   // ── ① Header ──────────────────────────────────────────────────────────────
   $("gen-at").textContent = d.generated_at
-    ? d.generated_at.replace("T", " ").replace("Z", " UTC") : "—";
+    ? new Date(d.generated_at).toLocaleString("ja-JP", {
+        timeZone: "Asia/Tokyo",
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit",
+      }) + " JST"
+    : "—";
 
   // ── ② Hero ────────────────────────────────────────────────────────────────
   const semi     = (d.nav || {}).semi || {};

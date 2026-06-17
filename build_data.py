@@ -3,7 +3,9 @@ import json
 import os
 import time
 import yfinance as yf
-from datetime import datetime, timezone, date as _date
+from datetime import datetime, timezone, timedelta, date as _date
+
+JST = timezone(timedelta(hours=9))
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -210,7 +212,7 @@ else:
 
 # ── 出力 ────────────────────────────────────────────────────────────────────
 output = {
-    "generated_at":   datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "generated_at":   datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S+09:00"),
     "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
     "status":         overall_status,
     "market":         market,
