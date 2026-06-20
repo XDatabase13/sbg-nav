@@ -32,6 +32,9 @@ jobs:
       - name: Run build_data.py
         run: python build_data.py
 
+      - name: Run build_history.py
+        run: python build_history.py
+
       - name: Commit and push if market data changed
         run: |
           git config user.name "github-actions[bot]"

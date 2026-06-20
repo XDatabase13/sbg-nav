@@ -125,6 +125,7 @@
   "timeseries": [
     {
       "date": "2026-03-31",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 40.06,
       "nav_per_share": 7029,
       "sbg_price": 3555.0,
@@ -135,6 +136,7 @@
     },
     {
       "date": "2026-04-01",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 40.4087,
       "nav_per_share": 7090,
       "sbg_price": 3764.0,
@@ -145,6 +147,7 @@
     },
     {
       "date": "2026-04-02",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.7048,
       "nav_per_share": 6967,
       "sbg_price": 3604.0,
@@ -155,6 +158,7 @@
     },
     {
       "date": "2026-04-03",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.8458,
       "nav_per_share": 6991,
       "sbg_price": 3609.0,
@@ -165,6 +169,7 @@
     },
     {
       "date": "2026-04-06",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.8133,
       "nav_per_share": 6986,
       "sbg_price": 3648.0,
@@ -175,6 +180,7 @@
     },
     {
       "date": "2026-04-07",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.149,
       "nav_per_share": 6869,
       "sbg_price": 3565.0,
@@ -185,6 +191,7 @@
     },
     {
       "date": "2026-04-08",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.6902,
       "nav_per_share": 6964,
       "sbg_price": 3822.0,
@@ -195,6 +202,7 @@
     },
     {
       "date": "2026-04-09",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.7872,
       "nav_per_share": 6981,
       "sbg_price": 3775.0,
@@ -205,6 +213,7 @@
     },
     {
       "date": "2026-04-10",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 39.6743,
       "nav_per_share": 6961,
       "sbg_price": 3778.0,
@@ -215,6 +224,7 @@
     },
     {
       "date": "2026-04-13",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 40.9466,
       "nav_per_share": 7184,
       "sbg_price": 3764.0,
@@ -225,6 +235,7 @@
     },
     {
       "date": "2026-04-14",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 41.3237,
       "nav_per_share": 7251,
       "sbg_price": 4242.0,
@@ -235,6 +246,7 @@
     },
     {
       "date": "2026-04-15",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 41.0739,
       "nav_per_share": 7207,
       "sbg_price": 4444.0,
@@ -245,6 +257,7 @@
     },
     {
       "date": "2026-04-16",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 41.4739,
       "nav_per_share": 7277,
       "sbg_price": 4672.0,
@@ -255,6 +268,7 @@
     },
     {
       "date": "2026-04-17",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 42.1055,
       "nav_per_share": 7388,
       "sbg_price": 4527.0,
@@ -265,6 +279,7 @@
     },
     {
       "date": "2026-04-20",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 43.1387,
       "nav_per_share": 7569,
       "sbg_price": 4774.0,
@@ -275,6 +290,7 @@
     },
     {
       "date": "2026-04-21",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 43.1295,
       "nav_per_share": 7568,
       "sbg_price": 5181.0,
@@ -285,6 +301,7 @@
     },
     {
       "date": "2026-04-22",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 45.8258,
       "nav_per_share": 8041,
       "sbg_price": 5620.0,
@@ -295,6 +312,7 @@
     },
     {
       "date": "2026-04-23",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 46.8564,
       "nav_per_share": 8221,
       "sbg_price": 5837.0,
@@ -305,6 +323,7 @@
     },
     {
       "date": "2026-04-24",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 50.7343,
       "nav_per_share": 8902,
       "sbg_price": 5963.0,
@@ -315,6 +334,7 @@
     },
     {
       "date": "2026-04-27",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 48.2788,
       "nav_per_share": 8471,
       "sbg_price": 5844.0,
@@ -325,6 +345,7 @@
     },
     {
       "date": "2026-04-28",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 46.0853,
       "nav_per_share": 8086,
       "sbg_price": 5268.0,
@@ -335,6 +356,7 @@
     },
     {
       "date": "2026-04-29",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 46.5029,
       "nav_per_share": 8159,
       "sbg_price": 5268.0,
@@ -345,6 +367,7 @@
     },
     {
       "date": "2026-04-30",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.7332,
       "nav_per_share": 8375,
       "sbg_price": 5219.0,
@@ -355,6 +378,7 @@
     },
     {
       "date": "2026-05-01",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.2878,
       "nav_per_share": 8297,
       "sbg_price": 5424.0,
@@ -365,6 +389,7 @@
     },
     {
       "date": "2026-05-04",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 46.2815,
       "nav_per_share": 8121,
       "sbg_price": 5424.0,
@@ -375,6 +400,7 @@
     },
     {
       "date": "2026-05-05",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.0323,
       "nav_per_share": 8252,
       "sbg_price": 5424.0,
@@ -385,6 +411,7 @@
     },
     {
       "date": "2026-05-06",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 50.6659,
       "nav_per_share": 8890,
       "sbg_price": 5424.0,
@@ -395,6 +422,7 @@
     },
     {
       "date": "2026-05-07",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.4821,
       "nav_per_share": 8331,
       "sbg_price": 6424.0,
@@ -405,6 +433,7 @@
     },
     {
       "date": "2026-05-08",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.5192,
       "nav_per_share": 8338,
       "sbg_price": 6131.0,
@@ -415,6 +444,7 @@
     },
     {
       "date": "2026-05-11",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.4653,
       "nav_per_share": 8328,
       "sbg_price": 5743.0,
@@ -425,6 +455,7 @@
     },
     {
       "date": "2026-05-12",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 46.9061,
       "nav_per_share": 8230,
       "sbg_price": 5987.0,
@@ -435,6 +466,7 @@
     },
     {
       "date": "2026-05-13",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 48.6847,
       "nav_per_share": 8542,
       "sbg_price": 6012.0,
@@ -445,6 +477,7 @@
     },
     {
       "date": "2026-05-14",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 49.6149,
       "nav_per_share": 8706,
       "sbg_price": 5770.0,
@@ -455,6 +488,7 @@
     },
     {
       "date": "2026-05-15",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 47.3265,
       "nav_per_share": 8304,
       "sbg_price": 5745.0,
@@ -465,6 +499,7 @@
     },
     {
       "date": "2026-05-18",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 48.1542,
       "nav_per_share": 8449,
       "sbg_price": 5593.0,
@@ -475,6 +510,7 @@
     },
     {
       "date": "2026-05-19",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 49.2261,
       "nav_per_share": 8637,
       "sbg_price": 5361.0,
@@ -485,6 +521,7 @@
     },
     {
       "date": "2026-05-20",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 53.4463,
       "nav_per_share": 9378,
       "sbg_price": 5039.0,
@@ -495,6 +532,7 @@
     },
     {
       "date": "2026-05-21",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 58.6129,
       "nav_per_share": 10284,
       "sbg_price": 6039.0,
@@ -505,6 +543,7 @@
     },
     {
       "date": "2026-05-22",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 59.6662,
       "nav_per_share": 10469,
       "sbg_price": 6757.0,
@@ -515,6 +554,7 @@
     },
     {
       "date": "2026-05-25",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 59.5758,
       "nav_per_share": 10453,
       "sbg_price": 7070.0,
@@ -525,6 +565,7 @@
     },
     {
       "date": "2026-05-26",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 61.4146,
       "nav_per_share": 10776,
       "sbg_price": 7841.0,
@@ -535,6 +576,7 @@
     },
     {
       "date": "2026-05-27",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 59.1835,
       "nav_per_share": 10385,
       "sbg_price": 7272.0,
@@ -545,6 +587,7 @@
     },
     {
       "date": "2026-05-28",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 63.3581,
       "nav_per_share": 11117,
       "sbg_price": 7125.0,
@@ -555,6 +598,7 @@
     },
     {
       "date": "2026-05-29",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 65.5232,
       "nav_per_share": 11497,
       "sbg_price": 7491.0,
@@ -565,6 +609,7 @@
     },
     {
       "date": "2026-06-01",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 72.5687,
       "nav_per_share": 12733,
       "sbg_price": 8541.0,
@@ -575,6 +620,7 @@
     },
     {
       "date": "2026-06-02",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 71.9049,
       "nav_per_share": 12617,
       "sbg_price": 8632.0,
@@ -585,6 +631,7 @@
     },
     {
       "date": "2026-06-03",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 73.1794,
       "nav_per_share": 12840,
       "sbg_price": 8315.0,
@@ -595,6 +642,7 @@
     },
     {
       "date": "2026-06-04",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 70.775,
       "nav_per_share": 12419,
       "sbg_price": 7377.0,
@@ -605,6 +653,7 @@
     },
     {
       "date": "2026-06-05",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 64.3613,
       "nav_per_share": 11293,
       "sbg_price": 7426.0,
@@ -615,6 +664,7 @@
     },
     {
       "date": "2026-06-08",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 64.9207,
       "nav_per_share": 11391,
       "sbg_price": 6976.0,
@@ -625,6 +675,7 @@
     },
     {
       "date": "2026-06-09",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 62.1168,
       "nav_per_share": 10899,
       "sbg_price": 7048.0,
@@ -635,6 +686,7 @@
     },
     {
       "date": "2026-06-10",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 60.003,
       "nav_per_share": 10528,
       "sbg_price": 6461.0,
@@ -645,6 +697,7 @@
     },
     {
       "date": "2026-06-11",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 64.4647,
       "nav_per_share": 11311,
       "sbg_price": 6374.0,
@@ -655,6 +708,7 @@
     },
     {
       "date": "2026-06-12",
+      "nav_epoch": "2026-03-31",
       "nav_tn": 69.23,
       "nav_per_share": 12147,
       "sbg_price": 6472.0,
@@ -664,14 +718,70 @@
       "usdjpy": 160.13
     },
     {
-      "date": "2026-06-13",
-      "nav_tn": 69.2466,
-      "nav_per_share": 12150,
-      "sbg_price": 6472.0,
-      "discount_pct": 46.7,
-      "arm": 380.81,
-      "sbkk": 213.5,
-      "usdjpy": 160.185
+      "date": "2026-06-15",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 73.1533,
+      "nav_per_share": 12836,
+      "sbg_price": 7139.0,
+      "discount_pct": 44.4,
+      "arm": 412.55,
+      "sbkk": 210.2,
+      "usdjpy": 159.955
+    },
+    {
+      "date": "2026-06-16",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 71.2038,
+      "nav_per_share": 12494,
+      "sbg_price": 7102.0,
+      "discount_pct": 43.2,
+      "arm": 396.34,
+      "sbkk": 211.6,
+      "usdjpy": 160.229
+    },
+    {
+      "date": "2026-06-17",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 74.1061,
+      "nav_per_share": 13003,
+      "sbg_price": 6880.0,
+      "discount_pct": 47.1,
+      "arm": 418.88,
+      "sbkk": 210.1,
+      "usdjpy": 160.419
+    },
+    {
+      "date": "2026-06-18",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 76.7838,
+      "nav_per_share": 13473,
+      "sbg_price": 7189.0,
+      "discount_pct": 46.6,
+      "arm": 439.46,
+      "sbkk": 210.1,
+      "usdjpy": 160.6
+    },
+    {
+      "date": "2026-06-19",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 77.0305,
+      "nav_per_share": 13516,
+      "sbg_price": 7111.0,
+      "discount_pct": 47.4,
+      "arm": 439.46,
+      "sbkk": 210.6,
+      "usdjpy": 161.289
+    },
+    {
+      "date": "2026-06-20",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 77.0256,
+      "nav_per_share": 13515,
+      "sbg_price": 7111.0,
+      "discount_pct": 47.4,
+      "arm": 439.46,
+      "sbkk": 210.6,
+      "usdjpy": 161.275
     }
   ],
   "snapshots": [
@@ -709,19 +819,19 @@
     },
     {
       "label": "latest",
-      "date": "2026-06-13",
-      "arm_tn": 48.3091,
-      "sbkk_tn": 2.8824,
-      "tmus_tn": 0.0451,
+      "date": "2026-06-20",
+      "arm_tn": 56.1288,
+      "sbkk_tn": 2.8432,
+      "tmus_tn": 0.0436,
       "svf2_tn": 17.19,
       "svf1_tn": 3.38,
       "latam_tn": 1.04,
       "other_tn": 4.61,
       "net_debt_tn": 8.21,
-      "holdings_tn": 77.4566,
-      "nav_tn": 69.2466,
-      "nav_per_share": 12150,
-      "sbg_price": 6472.0
+      "holdings_tn": 85.2356,
+      "nav_tn": 77.0256,
+      "nav_per_share": 13515,
+      "sbg_price": 7111.0
     }
   ],
   "official_points": [
@@ -738,7 +848,7 @@
       "total_tn": 47.7
     }
   ],
-  "timeseries_generated_at": "2026-06-13T02:32:19Z",
+  "timeseries_generated_at": "2026-06-20T12:34:52Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
