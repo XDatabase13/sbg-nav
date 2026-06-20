@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:30:44+09:00",
+  "generated_at": "2026-06-21T05:30:41+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
@@ -33,9 +33,9 @@
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 161.279,
-      "prev_close": 160.6,
-      "date": "2026-06-19",
+      "close": 161.275,
+      "prev_close": 161.289,
+      "date": "2026-06-20",
       "status": "ok"
     }
   },
@@ -53,15 +53,15 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 13516,
-      "nav_tn": 77.027,
+      "nav_per_share_jpy": 13515,
+      "nav_tn": 77.0256,
       "sbg_price_jpy": 7111.0,
       "discount_pct": 47.4
     },
     "official_nav_per_share_jpy": 7029,
     "sbg_actual_price_jpy": 7111.0,
     "discount_pct": -1.2,
-    "semi_nav_per_share_jpy": 13516,
+    "semi_nav_per_share_jpy": 13515,
     "semi_discount_pct": 47.4
   },
   "openai": {
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 56.1302,
+    "arm_value_tn_jpy": 56.1288,
     "sbkk_value_tn_jpy": 2.8432,
     "tmus_value_tn_jpy": 0.0436,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 85.237,
+    "holdings_total_tn_jpy": 85.2356,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 77.027
+    "semi_nav_tn_jpy": 77.0256
   },
   "official": {
     "valid_from": "2026-03-31",
@@ -848,7 +848,7 @@
       "total_tn": 47.7
     }
   ],
-  "timeseries_generated_at": "2026-06-20T12:34:52Z",
+  "timeseries_generated_at": "2026-06-20T20:30:42Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
