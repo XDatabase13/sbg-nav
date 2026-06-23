@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-06-23T05:30:40+09:00",
+  "generated_at": "2026-06-24T05:30:40+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 407.72,
-      "prev_close": 439.46,
-      "date": "2026-06-22",
+      "close": 366.39,
+      "prev_close": 407.72,
+      "date": "2026-06-23",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 180.06,
-      "prev_close": 181.67,
-      "date": "2026-06-22",
+      "close": 184.57,
+      "prev_close": 180.06,
+      "date": "2026-06-23",
       "status": "ok"
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 208.8,
-      "prev_close": 210.6,
-      "date": "2026-06-22",
+      "close": 205.6,
+      "prev_close": 208.8,
+      "date": "2026-06-23",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 7244.0,
-      "prev_close": 7111.0,
-      "date": "2026-06-22",
+      "close": 6513.0,
+      "prev_close": 7244.0,
+      "date": "2026-06-23",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 161.588,
-      "prev_close": 161.289,
-      "date": "2026-06-22",
+      "close": 161.572,
+      "prev_close": 161.433,
+      "date": "2026-06-23",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 12817,
-      "nav_tn": 73.0482,
-      "sbg_price_jpy": 7244.0,
-      "discount_pct": 43.5
+      "nav_per_share_jpy": 11881,
+      "nav_tn": 67.7124,
+      "sbg_price_jpy": 6513.0,
+      "discount_pct": 45.2
     },
     "official_nav_per_share_jpy": 7029,
-    "sbg_actual_price_jpy": 7244.0,
-    "discount_pct": -3.1,
-    "semi_nav_per_share_jpy": 12817,
-    "semi_discount_pct": 43.5
+    "sbg_actual_price_jpy": 6513.0,
+    "discount_pct": 7.3,
+    "semi_nav_per_share_jpy": 11881,
+    "semi_discount_pct": 45.2
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 52.1759,
-    "sbkk_value_tn_jpy": 2.8189,
-    "tmus_value_tn_jpy": 0.0433,
+    "arm_value_tn_jpy": 46.8823,
+    "sbkk_value_tn_jpy": 2.7757,
+    "tmus_value_tn_jpy": 0.0444,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 81.2582,
+    "holdings_total_tn_jpy": 75.9224,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 73.0482
+    "semi_nav_tn_jpy": 67.7124
   },
   "official": {
     "valid_from": "2026-03-31",
@@ -775,13 +775,24 @@
     {
       "date": "2026-06-22",
       "nav_epoch": "2026-03-31",
-      "nav_tn": 73.0482,
-      "nav_per_share": 12817,
+      "nav_tn": 72.9981,
+      "nav_per_share": 12809,
       "sbg_price": 7244.0,
-      "discount_pct": 43.5,
+      "discount_pct": 43.4,
       "arm": 407.72,
       "sbkk": 208.8,
-      "usdjpy": 161.588
+      "usdjpy": 161.433
+    },
+    {
+      "date": "2026-06-23",
+      "nav_epoch": "2026-03-31",
+      "nav_tn": 67.7125,
+      "nav_per_share": 11881,
+      "sbg_price": 6513.0,
+      "discount_pct": 45.2,
+      "arm": 366.39,
+      "sbkk": 205.6,
+      "usdjpy": 161.572
     }
   ],
   "snapshots": [
@@ -819,19 +830,19 @@
     },
     {
       "label": "latest",
-      "date": "2026-06-22",
-      "arm_tn": 52.1759,
-      "sbkk_tn": 2.8189,
-      "tmus_tn": 0.0433,
+      "date": "2026-06-23",
+      "arm_tn": 46.8823,
+      "sbkk_tn": 2.7757,
+      "tmus_tn": 0.0444,
       "svf2_tn": 17.19,
       "svf1_tn": 3.38,
       "latam_tn": 1.04,
       "other_tn": 4.61,
       "net_debt_tn": 8.21,
-      "holdings_tn": 81.2582,
-      "nav_tn": 73.0482,
-      "nav_per_share": 12817,
-      "sbg_price": 7244.0
+      "holdings_tn": 75.9225,
+      "nav_tn": 67.7125,
+      "nav_per_share": 11881,
+      "sbg_price": 6513.0
     }
   ],
   "official_points": [
@@ -848,7 +859,7 @@
       "total_tn": 47.7
     }
   ],
-  "timeseries_generated_at": "2026-06-22T20:30:41Z",
+  "timeseries_generated_at": "2026-06-23T20:30:41Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
