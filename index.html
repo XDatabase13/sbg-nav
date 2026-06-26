@@ -237,6 +237,37 @@ td.dt { font-family: var(--mono); color: var(--dim); font-size: .76rem; }
 footer { margin-top: 44px; padding: 22px 0 40px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--dim); line-height: 1.85; }
 .disclaimer { background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; color: var(--sub); font-size: .78rem; }
 footer a { color: var(--sub); }
+
+/* ── SEO lead / SEO section ──────────────────── */
+.lead-text {
+  margin-top: 20px;
+  padding: 14px 18px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: .88rem;
+  color: var(--sub);
+  line-height: 1.85;
+}
+.seo-section {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.seo-section h2 {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 26px 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.seo-section h2:first-of-type { margin-top: 0; }
+.seo-section p {
+  font-size: .84rem;
+  color: var(--sub);
+  line-height: 1.9;
+}
 </style>
 </head>
 <body>
@@ -266,6 +297,11 @@ footer a { color: var(--sub); }
   </div>
   <div id="banner" class="banner"></div>
 </header>
+
+<!-- SEO リード ──────────────────────────────────────────────────────────────── -->
+<div class="lead-text">
+ソフトバンクグループ（9984）の保有資産から理論株価（NAV：時価純資産）を毎営業日算出し、実際の株価とのディスカウント率（割安度）をリアルタイムに可視化します。アーム（Arm）をはじめとする保有株式の時価変動が、SBGの1株あたり価値にどう反映されるかを定量的に確認できます。
+</div>
 
 <!-- ②  HERO ─────────────────────────────────────────────────────────────────── -->
 <div class="hero" style="margin-top:28px">
@@ -486,6 +522,24 @@ footer a { color: var(--sub); }
     </div>
   </div>
 </div>
+
+<!-- SEO 解説 ─────────────────────────────────────────────────────────────────── -->
+<section class="seo-section">
+  <h2>このサイトについて</h2>
+  <p>ソフトバンクグループは事業会社というより、株式を保有する戦略的投資持株会社です。そのため企業価値は、損益計算書上の利益よりも、保有する資産の時価評価額によって決まります。この保有資産の時価総額から純有利子負債を差し引いたものが NAV（Net Asset Value：時価純資産）であり、SBGの本質的な価値を測るうえで最も重視される指標です。</p>
+
+  <h2>理論株価とディスカウント率の見方</h2>
+  <p>NAV を発行済株式数で割ると、1株あたりの理論株価が算出されます。市場では、実際の株価がこの理論株価を下回って取引されることが一般的で、その乖離の度合いを示すのがディスカウント率です。ソフトバンクグループのディスカウント率は、歴史的におおむね30%〜50%のレンジで推移してきました。現在の水準がこのレンジのどこにあるかを見ることで、株価が歴史的に見て割安なのか割高なのかを判断する手がかりになります。</p>
+
+  <h2>アーム（Arm）株価・主要投資先との連動</h2>
+  <p>近年、SBGの保有資産において最大の比重を占めるのが、英半導体設計大手アーム（Arm）の株式です。かつて中核だったアリババ株に代わり、現在はアームがポートフォリオの中心となっています。加えて、生成AIの中核企業であるOpenAIへの出資も、SBGの企業価値を語るうえで重要な要素となっています。そのため、エヌビディアの決算や半導体市況などでアームの株価が大きく動くと、SBGの保有資産価値、ひいては理論株価（NAV）に直接かつ大きな影響が及びます。本サイトでは、こうした上場保有株式の時価変動を毎営業日反映し、最新の理論株価を自動で算出しています。</p>
+
+  <h2>ファンド資産の評価について</h2>
+  <p>SBGの保有資産は、アームのような上場株式だけではありません。ソフトバンク・ビジョン・ファンド（SVF）が保有する多くの非上場企業の株式も、企業価値の重要な構成要素です。ただし、上場株式が市場価格で毎日変動するのに対し、非上場資産には市場で成立する株価が存在しないため、その評価額は四半期ごとの決算でのみ見直されます。したがって本サイトの理論株価は、上場保有株式についてはリアルタイムに近い形で反映する一方、非上場のファンド資産については直近の決算で開示された評価額を用いています。決算発表のタイミングでファンド資産の評価が更新される点に留意してください。</p>
+
+  <h2>算出ロジックの透明性</h2>
+  <p>本サイトは、理論株価の算出根拠を明示することを重視しています。基本的な計算は「保有株式の時価総額 − 純有利子負債 ＝ NAV」という構造で、利用者が数値の根拠を自己検証できるようにしています。LTV（保有資産に対する負債比率）などの財務健全性の観点も、企業価値を読むうえで参考になります。</p>
+</section>
 
 <!-- ⑩  FOOTER ─────────────────────────────────────────────────────────────── -->
 <footer>
