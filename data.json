@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-06-29T05:30:36+09:00",
+  "generated_at": "2026-06-30T05:30:41+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 334.27,
-      "prev_close": 347.71,
-      "date": "2026-06-26",
+      "close": 343.58,
+      "prev_close": 334.27,
+      "date": "2026-06-29",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 182.68,
-      "prev_close": 181.57,
-      "date": "2026-06-26",
+      "close": 173.97,
+      "prev_close": 182.68,
+      "date": "2026-06-29",
       "status": "ok"
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 204.7,
-      "prev_close": 203.3,
-      "date": "2026-06-26",
+      "close": 207.8,
+      "prev_close": 204.7,
+      "date": "2026-06-29",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 6226.0,
-      "prev_close": 7118.0,
-      "date": "2026-06-26",
+      "close": 5894.0,
+      "prev_close": 6226.0,
+      "date": "2026-06-29",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 161.703,
+      "close": 161.936,
       "prev_close": 161.805,
-      "date": "2026-06-28",
+      "date": "2026-06-29",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 11164,
-      "nav_tn": 63.6246,
-      "sbg_price_jpy": 6226.0,
-      "discount_pct": 44.2
+      "nav_per_share_jpy": 11391,
+      "nav_tn": 64.92,
+      "sbg_price_jpy": 5894.0,
+      "discount_pct": 48.3
     },
     "official_nav_per_share_jpy": 7029,
-    "sbg_actual_price_jpy": 6226.0,
-    "discount_pct": 11.4,
-    "semi_nav_per_share_jpy": 11164,
-    "semi_discount_pct": 44.2
+    "sbg_actual_price_jpy": 5894.0,
+    "discount_pct": 16.1,
+    "semi_nav_per_share_jpy": 11391,
+    "semi_discount_pct": 48.3
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 42.807,
-    "sbkk_value_tn_jpy": 2.7636,
-    "tmus_value_tn_jpy": 0.044,
+    "arm_value_tn_jpy": 44.0626,
+    "sbkk_value_tn_jpy": 2.8054,
+    "tmus_value_tn_jpy": 0.042,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 71.8346,
+    "holdings_total_tn_jpy": 73.13,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 63.6246
+    "semi_nav_tn_jpy": 64.92
   },
   "official": {
     "valid_from": "2026-03-31",
@@ -828,15 +828,15 @@
       "usdjpy": 161.805
     },
     {
-      "date": "2026-06-28",
+      "date": "2026-06-29",
       "nav_epoch": "2026-03-31",
-      "nav_tn": 63.6246,
-      "nav_per_share": 11164,
-      "sbg_price": 6226.0,
-      "discount_pct": 44.2,
-      "arm": 334.27,
-      "sbkk": 204.7,
-      "usdjpy": 161.703
+      "nav_tn": 64.92,
+      "nav_per_share": 11391,
+      "sbg_price": 5894.0,
+      "discount_pct": 48.3,
+      "arm": 343.58,
+      "sbkk": 207.8,
+      "usdjpy": 161.936
     }
   ],
   "snapshots": [
@@ -874,19 +874,19 @@
     },
     {
       "label": "latest",
-      "date": "2026-06-28",
-      "arm_tn": 42.807,
-      "sbkk_tn": 2.7636,
-      "tmus_tn": 0.044,
+      "date": "2026-06-29",
+      "arm_tn": 44.0626,
+      "sbkk_tn": 2.8054,
+      "tmus_tn": 0.042,
       "svf2_tn": 17.19,
       "svf1_tn": 3.38,
       "latam_tn": 1.04,
       "other_tn": 4.61,
       "net_debt_tn": 8.21,
-      "holdings_tn": 71.8346,
-      "nav_tn": 63.6246,
-      "nav_per_share": 11164,
-      "sbg_price": 6226.0
+      "holdings_tn": 73.13,
+      "nav_tn": 64.92,
+      "nav_per_share": 11391,
+      "sbg_price": 5894.0
     }
   ],
   "official_points": [
@@ -903,7 +903,7 @@
       "total_tn": 47.7
     }
   ],
-  "timeseries_generated_at": "2026-06-28T20:30:37Z",
+  "timeseries_generated_at": "2026-06-29T20:30:42Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
