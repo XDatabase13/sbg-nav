@@ -36,6 +36,35 @@ print(f"yfinance 取得中: {START_FETCH} → {TODAY} ...")
 raw   = yf.download(TICKERS, start=START_FETCH, auto_adjust=False, progress=False)
 close = raw["Close"].copy()
 
+# ── quote補追 ────────────────────────────────────────────────────────────────
+# 2026-07-06頃からYahooのチャートAPIが東証銘柄で「引け後〜翌営業日の反映まで」
+# 直近セッションの日足バーを返さなくなった。チャートAPIメタ（quote相当）は
+# 常に直近約定を持つので、日足の終端より新しい日付があれば行を補追する。
+print("▼ quote補追チェック")
+for _tkr in TICKERS:
+    try:
+        _t = yf.Ticker(_tkr)
+        _t.history(period="5d")
+        _meta  = _t.get_history_metadata()
+        _price = _meta.get("regularMarketPrice")
+        _epoch = _meta.get("regularMarketTime")
+        _tz    = _meta.get("exchangeTimezoneName")
+        if _price is None or _epoch is None or _tz is None:
+            continue
+        _q_str    = str(pd.Timestamp(_epoch, unit="s", tz="UTC").tz_convert(_tz).date())
+        _series   = close[_tkr].dropna()
+        if _series.empty:
+            continue
+        _last_str = _series.index[-1].strftime("%Y-%m-%d")
+        if _q_str > _last_str and float(_price) > 0:
+            _new_idx = (pd.Timestamp(_q_str, tz=close.index.tz)
+                        if close.index.tz is not None else pd.Timestamp(_q_str))
+            close.loc[_new_idx, _tkr] = float(_price)
+            print(f"  [補追] {_tkr}: {_q_str} = {_price}（quote、日足は{_last_str}止まり）")
+    except Exception as _ex:
+        print(f"  [補追失敗] {_tkr}: {_ex}")
+close = close.sort_index()
+
 # 前日値で補完（米日祝日ズレ対応）→ 全NaN行（週末等）を除外
 close = close.ffill()
 close = close.dropna(how="all")

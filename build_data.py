@@ -2,6 +2,7 @@ import sys
 import json
 import os
 import time
+import pandas as pd
 import yfinance as yf
 from datetime import datetime, timezone, timedelta, date as _date
 
@@ -29,19 +30,57 @@ TICKERS = {
 }
 
 
+def _quote_latest(ticker_obj) -> tuple:
+    """
+    チャートAPIメタ（quote相当）から直近約定値と時刻を返す。
+    2026-07-06頃からYahooのチャートAPIが東証銘柄で「引け後〜翌営業日の反映まで」
+    直近セッションの日足バーを返さなくなったため、
+    日足の最終バーが古い場合のフォールバックとして使う。
+    直近の history() 呼び出しのレスポンスを再利用するので追加リクエストは発生しない。
+    戻り値: (price: float|None, dt: datetime|None)  — dt は取引所タイムゾーン
+    """
+    try:
+        meta    = ticker_obj.get_history_metadata()
+        price   = meta.get("regularMarketPrice")
+        epoch   = meta.get("regularMarketTime")
+        tz_name = meta.get("exchangeTimezoneName")
+        if price is None or epoch is None or tz_name is None:
+            return None, None
+        dt = pd.Timestamp(epoch, unit="s", tz="UTC").tz_convert(tz_name).to_pydatetime()
+        return float(price), dt
+    except Exception:
+        return None, None
+
+
 def _fetch_once(ticker: str) -> dict:
     """yfinanceから終値を1回取得する（リトライなし）。"""
     try:
-        hist = yf.Ticker(ticker).history(period="10d", auto_adjust=False)
+        tobj = yf.Ticker(ticker)
+        hist = tobj.history(period="10d", auto_adjust=False)
         if hist.empty:
             return {"close": None, "prev_close": None, "date": None, "status": "failed"}
         valid = hist["Close"].dropna()
         if valid.empty:
             return {"close": None, "prev_close": None, "date": None, "status": "failed"}
+
+        close_v = round(float(valid.iloc[-1]), 4)
+        prev_v  = round(float(valid.iloc[-2]), 4) if len(valid) >= 2 else None
+        date_s  = valid.index[-1].strftime("%Y-%m-%d")
+
+        # quoteフォールバック: 日足最終バーより新しい日付の約定があれば採用
+        q_val, q_dt = _quote_latest(tobj)
+        if (q_val is not None and q_val > 0 and q_dt is not None
+                and q_dt.strftime("%Y-%m-%d") > date_s):
+            print(f"    [補正] {ticker}: 日足が{date_s}止まりのため"
+                  f" quote終値({q_dt.strftime('%Y-%m-%d')} {q_val})を採用")
+            prev_v  = close_v
+            close_v = round(float(q_val), 4)
+            date_s  = q_dt.strftime("%Y-%m-%d")
+
         return {
-            "close":      round(float(valid.iloc[-1]), 4),
-            "prev_close": round(float(valid.iloc[-2]), 4) if len(valid) >= 2 else None,
-            "date":       valid.index[-1].strftime("%Y-%m-%d"),
+            "close":      close_v,
+            "prev_close": prev_v,
+            "date":       date_s,
             "status":     "ok",
         }
     except Exception as e:
