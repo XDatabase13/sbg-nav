@@ -222,7 +222,7 @@ official_a = {
 
 discount_official = round((1 - sbg_price / official_nav_per_share) * 100, 1) if sbg_price else None
 
-# ── ② リアルタイムNAV計算 ───────────────────────────────────────────────────
+# ── ② 日次推計NAV計算 ───────────────────────────────────────────────────────
 comp    = cur_epoch["components"]
 listed  = comp["listed"]
 fx_asof = cur_epoch["as_of_fx_usdjpy"]
