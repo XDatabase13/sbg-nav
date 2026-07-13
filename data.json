@@ -71,7 +71,7 @@
     "company_valuation_as_of": "2026-03-31",
     "company_valuation_note": "2026年3月31日完了ラウンドのポストマネー評価額",
     "trend_note": "SBG初出資時（約2,600億ドル）から約3.3倍に成長",
-    "future_note": "OpenAI上場時にはリアルタイム反映に対応予定"
+    "future_note": "OpenAI上場時には日次NAVへの反映に対応予定"
   },
   "nav_breakdown": {
     "arm_value_tn_jpy": 41.3845,
