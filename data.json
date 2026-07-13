@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-07-13T05:31:17+09:00",
+  "generated_at": "2026-07-14T05:31:05+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 323.39,
-      "prev_close": 327.87,
-      "date": "2026-07-10",
+      "close": 298.99,
+      "prev_close": 323.39,
+      "date": "2026-07-13",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 187.61,
-      "prev_close": 181.48,
-      "date": "2026-07-10",
+      "close": 188.41,
+      "prev_close": 187.61,
+      "date": "2026-07-13",
       "status": "ok"
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 211.4,
-      "prev_close": 214.4,
-      "date": "2026-07-10",
+      "close": 214.6,
+      "prev_close": 211.4,
+      "date": "2026-07-13",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 6370.0,
-      "prev_close": 5757.0,
-      "date": "2026-07-10",
+      "close": 6364.0,
+      "prev_close": 6370.0,
+      "date": "2026-07-13",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 161.589,
+      "close": 162.444,
       "prev_close": 162.363,
-      "date": "2026-07-12",
+      "date": "2026-07-13",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 10930,
-      "nav_tn": 62.2937,
-      "sbg_price_jpy": 6370.0,
-      "discount_pct": 41.7
+      "nav_per_share_jpy": 10426,
+      "nav_tn": 59.4173,
+      "sbg_price_jpy": 6364.0,
+      "discount_pct": 39.0
     },
     "official_nav_per_share_jpy": 7029,
-    "sbg_actual_price_jpy": 6370.0,
-    "discount_pct": 9.4,
-    "semi_nav_per_share_jpy": 10930,
-    "semi_discount_pct": 41.7
+    "sbg_actual_price_jpy": 6364.0,
+    "discount_pct": 9.5,
+    "semi_nav_per_share_jpy": 10426,
+    "semi_discount_pct": 39.0
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時には日次NAVへの反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 41.3845,
-    "sbkk_value_tn_jpy": 2.8541,
-    "tmus_value_tn_jpy": 0.0452,
+    "arm_value_tn_jpy": 38.4644,
+    "sbkk_value_tn_jpy": 2.8973,
+    "tmus_value_tn_jpy": 0.0456,
     "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 70.5037,
+    "holdings_total_tn_jpy": 67.6273,
     "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 62.2937
+    "semi_nav_tn_jpy": 59.4173
   },
   "official": {
     "valid_from": "2026-03-31",
@@ -938,15 +938,15 @@
       "usdjpy": 162.363
     },
     {
-      "date": "2026-07-12",
+      "date": "2026-07-13",
       "nav_epoch": "2026-03-31",
-      "nav_tn": 62.2937,
-      "nav_per_share": 10930,
-      "sbg_price": 6370.0,
-      "discount_pct": 41.7,
-      "arm": 323.39,
-      "sbkk": 211.4,
-      "usdjpy": 161.589
+      "nav_tn": 59.4192,
+      "nav_per_share": 10426,
+      "sbg_price": 6364.0,
+      "discount_pct": 39.0,
+      "arm": 298.99,
+      "sbkk": 214.6,
+      "usdjpy": 162.452
     }
   ],
   "snapshots": [
@@ -984,19 +984,19 @@
     },
     {
       "label": "latest",
-      "date": "2026-07-12",
-      "arm_tn": 41.3845,
-      "sbkk_tn": 2.8541,
-      "tmus_tn": 0.0452,
+      "date": "2026-07-13",
+      "arm_tn": 38.4663,
+      "sbkk_tn": 2.8973,
+      "tmus_tn": 0.0456,
       "svf2_tn": 17.19,
       "svf1_tn": 3.38,
       "latam_tn": 1.04,
       "other_tn": 4.61,
       "net_debt_tn": 8.21,
-      "holdings_tn": 70.5037,
-      "nav_tn": 62.2937,
-      "nav_per_share": 10930,
-      "sbg_price": 6370.0
+      "holdings_tn": 67.6292,
+      "nav_tn": 59.4192,
+      "nav_per_share": 10426,
+      "sbg_price": 6364.0
     }
   ],
   "official_points": [
@@ -1013,7 +1013,7 @@
       "total_tn": 47.7
     }
   ],
-  "timeseries_generated_at": "2026-07-12T20:31:19Z",
+  "timeseries_generated_at": "2026-07-13T20:31:07Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
