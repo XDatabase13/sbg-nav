@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T19:31:38+09:00",
+  "generated_at": "2026-08-08T19:37:06+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
@@ -46,11 +46,11 @@
       "as_of": "2026-06-30"
     },
     "official_b": {
-      "nav_per_share_jpy": 8370,
-      "total_tn": 47.7,
-      "as_of": "2026-05-12",
-      "source": "https://ai.softbank/insights/022/",
-      "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
+      "nav_per_share_jpy": 10230,
+      "total_tn": 58.3,
+      "as_of": "2026-08-05",
+      "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q1fy2026_02.pdf",
+      "note": "SBGがQ1決算発表(8/6)で開示した「8/5時点の株価・為替による試算NAV」。円/株はNAV総額と確定株式数(box1・box2と同一方式で逆算検証済み)から算出。"
     },
     "semi": {
       "nav_per_share_jpy": 10760,
@@ -1220,6 +1220,18 @@
       "nav_per_share": 8370,
       "label": "公式参考NAV(①-b)",
       "total_tn": 47.7
+    },
+    {
+      "date": "2026-06-30",
+      "nav_per_share": 12686,
+      "label": "公式確定NAV(①-a)",
+      "total_tn": 72.29
+    },
+    {
+      "date": "2026-08-05",
+      "nav_per_share": 10230,
+      "label": "公式参考NAV(①-b)",
+      "total_tn": 58.3
     }
   ],
   "timeseries_generated_at": "2026-08-07T20:30:48Z",

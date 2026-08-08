@@ -1,11 +1,11 @@
 {
   "_meta": {
     "official_b": {
-      "nav_per_share_jpy": 8370,
-      "total_tn": 47.7,
-      "as_of": "2026-05-12",
-      "source": "https://ai.softbank/insights/022/",
-      "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
+      "nav_per_share_jpy": 10230,
+      "total_tn": 58.3,
+      "as_of": "2026-08-05",
+      "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q1fy2026_02.pdf",
+      "note": "SBGがQ1決算発表(8/6)で開示した「8/5時点の株価・為替による試算NAV」。円/株はNAV総額と確定株式数(box1・box2と同一方式で逆算検証済み)から算出。"
     },
     "openai": {
       "sbg_stake_value_usd_bn": 79.6,
