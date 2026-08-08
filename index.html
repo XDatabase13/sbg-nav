@@ -330,7 +330,7 @@ footer a { color: var(--sub); }
 <!-- D  前提条件ボックス ────────────────────────────────────────────────────── -->
 <div class="assume-box">
   <span class="assume-label">本試算の前提条件</span>
-  当サイトの日次推計NAVは、直近四半期末（2026年3月末）から純負債および上場株の担保割合が変動していないという仮定に基づく簡易試算です。純負債（8.21兆円）は2026年3月末時点の公式値を使用し、次回の四半期決算発表時に更新します。
+  当サイトの日次推計NAVは、直近四半期末（2026年6月末）から純負債および上場株の担保割合が変動していないという仮定に基づく簡易試算です。純負債（10.81兆円）は2026年6月末時点の公式値を使用し、次回の四半期決算発表時に更新します。
 </div>
 
 <!-- ③  OPENAI APPEAL ──────────────────────────────────────────────────────── -->
@@ -369,7 +369,7 @@ footer a { color: var(--sub); }
 
     <!-- ①-a -->
     <div class="nav-card official1">
-      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年3月末・確定値）</div>
+      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年6月末・確定値）</div>
       <div class="nav-val"><span class="yen">¥</span><span id="nava-val">—</span></div>
       <div class="nav-tn" id="nava-tn">—</div>
       <div class="nav-date" id="nava-date">—</div>
@@ -378,11 +378,11 @@ footer a { color: var(--sub); }
 
     <!-- ①-b -->
     <div class="nav-card official2">
-      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年5月12日・参考試算）</div>
+      <div class="nav-tag"><span class="dot"></span>公式NAV（2026年8月5日・参考試算）</div>
       <div class="nav-val"><span class="yen">¥</span><span id="navb-val">—</span></div>
       <div class="nav-tn" id="navb-tn">—</div>
       <div class="nav-date" id="navb-date">—</div>
-      <div class="nav-desc" id="navb-desc">SBGが2026年5月12日時点の株価・為替で試算した公式参考値。</div>
+      <div class="nav-desc" id="navb-desc">SBGが2026年8月5日時点の株価・為替で試算した公式参考値。</div>
     </div>
 
     <!-- ② -->
@@ -392,7 +392,7 @@ footer a { color: var(--sub); }
       <div class="nav-tn" id="nav2-tn">—</div>
       <div class="nav-date">上場株 = 各市場の直近終値</div>
       <div class="nav-disc" id="nav2-disc">—</div>
-      <div class="nav-verify">5/12検証: 公式参考値(47.7兆)を誤差1.4%以内で再現</div>
+      <div class="nav-verify">8/5検証: 公式参考値(58.3兆)を誤差3.3%以内で再現</div>
     </div>
 
   </div>
@@ -418,26 +418,26 @@ footer a { color: var(--sub); }
       <div class="step-n">Step 1</div>
       <div class="step-body">
         各上場株の今日価値（兆円）を算出：<br>
-        <code>米国株(Arm/T-Mobile) = 3月末調整後価値 × (今日終値 ÷ 3月末終値) × (今日USDJPY ÷ 3月末USDJPY)</code><br>
-        <code>日本株(SBKK)　　　　 = 3月末調整後価値 × (今日終値 ÷ 3月末終値)</code>
+        <code>米国株(Arm/T-Mobile) = 6月末調整後価値 × (今日終値 ÷ 6月末終値) × (今日USDJPY ÷ 6月末USDJPY)</code><br>
+        <code>日本株(SBKK)　　　　 = 6月末調整後価値 × (今日終値 ÷ 6月末終値)</code>
       </div>
     </div>
 
     <div class="method-step">
       <div class="step-n">Step 2</div>
-      <div class="step-body">非上場資産（SVF1+SVF2+LatAm+その他 = 26.22兆）と純負債（8.21兆）は <span id="m-asof">2026-03-31</span> 固定</div>
+      <div class="step-body">非上場資産（SVF1+SVF2+LatAm+その他 = 30.40兆）と純負債（10.81兆）は <span id="m-asof">2026-06-30</span> 固定</div>
     </div>
 
     <div class="method-step">
       <div class="step-n">Step 3</div>
-      <div class="step-body"><code>②保有合計 = Arm今日価値 + SBKK今日価値 + T-Mobile今日価値 + 26.22兆</code></div>
+      <div class="step-body"><code>②保有合計 = Arm今日価値 + SBKK今日価値 + T-Mobile今日価値 + 30.40兆</code></div>
     </div>
 
     <div class="method-step">
       <div class="step-n">Step 4</div>
       <div class="step-body">
-        <code>②NAV(兆円) = ②保有合計 − 8.21兆</code><br>
-        <code>②理論株価(円) = ②NAV × 1兆 ÷ 5,698,923,701株</code>
+        <code>②NAV(兆円) = ②保有合計 − 10.81兆</code><br>
+        <code>②理論株価(円) = ②NAV × 1兆 ÷ 5,699,049,389株</code>
       </div>
     </div>
 
@@ -453,7 +453,7 @@ footer a { color: var(--sub); }
       <div class="err-title">▼ 誤差の要因</div>
       <div class="err-row">
         <span class="err-num">(1)</span>
-        <div><b>非上場部分の四半期固定</b>: SVF2/SVF1/LatAm/その他は3月末公式値を次の決算まで据え置き。この間に実際の評価額は変動しているため乖離が生じる。</div>
+        <div><b>非上場部分の四半期固定</b>: SVF2/SVF1/LatAm/その他は6月末公式値を次の決算まで据え置き。この間に実際の評価額は変動しているため乖離が生じる。</div>
       </div>
       <div class="err-row">
         <span class="err-num">(2)</span>
@@ -471,7 +471,7 @@ footer a { color: var(--sub); }
 <!-- ⑦  推移グラフ ──────────────────────────────────────────────────────────── -->
 <div class="section">
   <div class="section-title">② 理論株価 &amp; SBG実株価の推移 / Trend</div>
-  <p class="chart-note">塗りつぶし部分（金色）が割安度（ディスカウント）。差が大きいほど実株価がNAVより割安。緑の点は公式NAV発表値 — ①-a（3月末）は計算の起点のため一致。①-b（5月12日）との一致（誤差1.4%）が試算精度の確認になる。</p>
+  <p class="chart-note">塗りつぶし部分（金色）が割安度（ディスカウント）。差が大きいほど実株価がNAVより割安。緑の点は公式NAV発表値 — ①-a（6月末）は計算の起点のため一致。①-b（8月5日）との一致（誤差3.3%）が試算精度の確認になる。</p>
   <div class="chart-wrap">
     <canvas id="trend-chart"></canvas>
   </div>
@@ -519,7 +519,7 @@ footer a { color: var(--sub); }
     <div class="future-title">OpenAI 上場時 — 日次NAVへ反映</div>
     <div class="future-desc">
       OpenAIが株式上場した時点で、SBGのOpenAI持分を取得時点で利用可能な直近の株価・為替で評価し、日次推計NAV（②）に直接組み込み、毎日自動更新する予定。<br>
-      現在、OpenAIはSVF2（非上場枠=26.22兆の中）に含まれており、上場前は公式評価額で固定扱い。上場後は②と同じ仕組みで日次計算が可能になる。
+      現在、OpenAIはSVF2（非上場枠=30.40兆の中）に含まれており、上場前は公式評価額で固定扱い。上場後は②と同じ仕組みで日次計算が可能になる。
     </div>
   </div>
 </div>
@@ -696,7 +696,7 @@ footer a { color: var(--sub); }
   });
 
   // ── ⑥ Methodology date ────────────────────────────────────────────────────
-  $("m-asof").textContent = (d.official || {}).as_of || "2026-03-31";
+  $("m-asof").textContent = (d.official || {}).as_of || "2026-06-30";
 
   // ── ⑦ Trend chart ─────────────────────────────────────────────────────────
   const ts  = d.timeseries || [];
