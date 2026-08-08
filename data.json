@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T05:30:45+09:00",
+  "generated_at": "2026-08-08T19:31:38+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
@@ -33,7 +33,7 @@
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 157.751,
+      "close": 157.745,
       "prev_close": 157.6,
       "date": "2026-08-07",
       "status": "ok"
@@ -41,9 +41,9 @@
   },
   "nav": {
     "official_a": {
-      "nav_per_share_jpy": 7029,
-      "total_tn": 40.06,
-      "as_of": "2026-03-31"
+      "nav_per_share_jpy": 12686,
+      "total_tn": 72.29,
+      "as_of": "2026-06-30"
     },
     "official_b": {
       "nav_per_share_jpy": 8370,
@@ -53,16 +53,16 @@
       "note": "SBG決算説明会2026/5/12参考値。OpenAI 7,300億ドル(2026/2公式)前提での試算。"
     },
     "semi": {
-      "nav_per_share_jpy": 9909,
-      "nav_tn": 56.4708,
+      "nav_per_share_jpy": 10760,
+      "nav_tn": 61.3231,
       "sbg_price_jpy": 5552.0,
-      "discount_pct": 44.0
+      "discount_pct": 48.4
     },
-    "official_nav_per_share_jpy": 7029,
+    "official_nav_per_share_jpy": 12686,
     "sbg_actual_price_jpy": 5552.0,
-    "discount_pct": 21.0,
-    "semi_nav_per_share_jpy": 9909,
-    "semi_discount_pct": 44.0
+    "discount_pct": 56.2,
+    "semi_nav_per_share_jpy": 10760,
+    "semi_discount_pct": 48.4
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,51 +74,51 @@
     "future_note": "OpenAI上場時には日次NAVへの反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 35.3018,
-    "sbkk_value_tn_jpy": 3.1173,
-    "tmus_value_tn_jpy": 0.0416,
-    "unlisted_tn_jpy": 26.22,
-    "holdings_total_tn_jpy": 64.6808,
-    "net_debt_tn_jpy": 8.21,
-    "semi_nav_tn_jpy": 56.4708
+    "arm_value_tn_jpy": 38.6374,
+    "sbkk_value_tn_jpy": 3.0957,
+    "tmus_value_tn_jpy": 0.0,
+    "unlisted_tn_jpy": 30.4,
+    "holdings_total_tn_jpy": 72.1331,
+    "net_debt_tn_jpy": 10.81,
+    "semi_nav_tn_jpy": 61.3231
   },
   "official": {
-    "valid_from": "2026-03-31",
-    "as_of_label": "FY2025 Q4",
-    "as_of": "2026-03-31",
-    "source": "https://group.softbank/ir/stock/sotp",
-    "official_nav_per_share_jpy": 7029,
-    "nav_total_tn": 40.06,
-    "holdings_total_jpy_tn": 48.26,
-    "net_debt_jpy_tn": 8.21,
-    "shares_outstanding": 5698923701,
-    "note": "SBG公式SOTPの四半期末値。次回決算発表時に手動更新する。",
-    "as_of_fx_usdjpy": 159.841,
+    "valid_from": "2026-06-30",
+    "as_of_label": "FY2026 Q1",
+    "as_of": "2026-06-30",
+    "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q1fy2026_02.pdf",
+    "official_nav_per_share_jpy": 12686,
+    "nav_total_tn": 72.29,
+    "holdings_total_jpy_tn": 83.1,
+    "net_debt_jpy_tn": 10.81,
+    "shares_outstanding": 5699049389,
+    "note": "SBG公式SOTPの四半期末値(2026年6月末、決算データシートp.17「NAVとLTV」・p.18「LTV計算」で相互検算済み)。次回決算発表時に手動更新する。純負債の検算根拠: 連結純有利子負債22.29兆円− 独立採算子会社等純有利子負債6.03兆円− その他調整5.45兆円=10.81兆円。",
+    "as_of_fx_usdjpy": 162.39,
     "components": {
       "listed": {
         "arm": {
-          "value_tn_jpy": 19.15,
-          "price_asof": 151.28,
+          "value_tn_jpy": 49.91,
+          "price_asof": 354.57,
           "currency": "USD"
         },
         "sbkk": {
-          "value_tn_jpy": 2.85,
-          "price_asof": 211.1,
+          "value_tn_jpy": 2.79,
+          "price_asof": 208.1,
           "currency": "JPY"
         },
         "tmus": {
-          "value_tn_jpy": 0.05,
-          "price_asof": 210.03,
+          "value_tn_jpy": 0.0,
+          "price_asof": 167.73,
           "currency": "USD"
         }
       },
-      "unlisted_total_tn_jpy": 26.22,
-      "net_debt_tn_jpy": 8.21,
+      "unlisted_total_tn_jpy": 30.4,
+      "net_debt_tn_jpy": 10.81,
       "unlisted_breakdown": {
-        "svf2_tn": 17.19,
-        "svf1_tn": 3.38,
-        "latam_tn": 1.04,
-        "other_tn": 4.61
+        "svf2_tn": 19.29,
+        "svf1_tn": 3.6,
+        "latam_tn": 1.0,
+        "other_tn": 6.51
       }
     }
   },

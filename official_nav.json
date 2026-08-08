@@ -45,6 +45,34 @@
           "other_tn": 4.61
         }
       }
+    },
+    {
+      "valid_from": "2026-06-30",
+      "as_of_label": "FY2026 Q1",
+      "as_of": "2026-06-30",
+      "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q1fy2026_02.pdf",
+      "official_nav_per_share_jpy": 12686,
+      "nav_total_tn": 72.29,
+      "holdings_total_jpy_tn": 83.1,
+      "net_debt_jpy_tn": 10.81,
+      "shares_outstanding": 5699049389,
+      "note": "SBG公式SOTPの四半期末値(2026年6月末、決算データシートp.17「NAVとLTV」・p.18「LTV計算」で相互検算済み)。次回決算発表時に手動更新する。純負債の検算根拠: 連結純有利子負債22.29兆円− 独立採算子会社等純有利子負債6.03兆円− その他調整5.45兆円=10.81兆円。",
+      "as_of_fx_usdjpy": 162.39,
+      "components": {
+        "listed": {
+          "arm":  {"value_tn_jpy": 49.91, "price_asof": 354.57, "currency": "USD"},
+          "sbkk": {"value_tn_jpy": 2.79,  "price_asof": 208.1,  "currency": "JPY"},
+          "tmus": {"value_tn_jpy": 0.0,   "price_asof": 167.73, "currency": "USD"}
+        },
+        "unlisted_total_tn_jpy": 30.4,
+        "net_debt_tn_jpy": 10.81,
+        "unlisted_breakdown": {
+          "svf2_tn": 19.29,
+          "svf1_tn":  3.6,
+          "latam_tn": 1.0,
+          "other_tn": 6.51
+        }
+      }
     }
   ]
 }
