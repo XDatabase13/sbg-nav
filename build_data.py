@@ -1,6 +1,7 @@
 import sys
 import json
 import os
+import re
 import time
 import pandas as pd
 import yfinance as yf
@@ -9,6 +10,8 @@ from datetime import datetime, timezone, timedelta, date as _date
 JST = timezone(timedelta(hours=9))
 
 sys.stdout.reconfigure(encoding="utf-8")
+
+INDEX_PATH = "index.html"
 
 # ── 設定値（後から調整しやすいよう上部にまとめる） ─────────────────────────────
 RETRY_MAX      = 3     # リトライ上限回数
@@ -266,6 +269,93 @@ else:
     semi_discount_pct  = None
     nav_breakdown      = None
 
+# ── 静的HTML焼き込み(AdSense/SEO対応) ─────────────────────────────────────────
+# sbg-nav の index.html は #content 一括innerHTML方式ではなく、id指定の要素へ
+# JSが .textContent を個別代入する方式のため、hub/crypto-nav のマーカー区間置換
+# ではなく「id属性を目印にした直接置換」で焼き込む(要素の外形・class位置は不変)。
+def _yen(n) -> str:
+    if n is None:
+        return "—"
+    return f"{round(n):,}"
+
+
+def _num(n, d: int = 2) -> str:
+    if n is None:
+        return "—"
+    return f"{n:,.{d}f}"
+
+
+def _pct(v, show_sign: bool = True) -> str:
+    if v is None:
+        return "—"
+    sign = "+" if (v >= 0 and show_sign) else ""
+    return f"{sign}{_num(v, 1)}%"
+
+
+def _fmt_date_jst(iso_str) -> str:
+    if not iso_str:
+        return "—"
+    try:
+        dt = datetime.fromisoformat(iso_str).astimezone(JST)
+        return dt.strftime("%Y/%m/%d %H:%M") + " JST"
+    except Exception:
+        return iso_str
+
+
+def _replace_by_id(content: str, elem_id: str, new_inner: str) -> str:
+    """id="X" を持つ開始タグ直後(次の '<' まで)を new_inner に置換する。"""
+    pattern = re.compile(r'(id="' + re.escape(elem_id) + r'"[^>]*>)[^<]*')
+    if not pattern.search(content):
+        print(f"[bake警告] id={elem_id} が見つかりません")
+        return content
+    return pattern.sub(lambda m: m.group(1) + new_inner, content, count=1)
+
+
+def _replace_class_and_id(content: str, elem_id: str, new_class: str, new_inner: str) -> str:
+    """class="..." id="X" の順で並ぶ要素の class 属性と内側テキストを両方置換する。"""
+    pattern = re.compile(r'(class=")[^"]*(" id="' + re.escape(elem_id) + r'"[^>]*>)[^<]*')
+    if not pattern.search(content):
+        print(f"[bake警告] id={elem_id}(class付き) が見つかりません")
+        return content
+    return pattern.sub(lambda m: m.group(1) + new_class + m.group(2) + new_inner, content, count=1)
+
+
+def bake_index_html(out: dict, index_path: str) -> None:
+    if not os.path.exists(index_path):
+        print(f"[bake警告] {index_path} が見つかりません。スキップ。")
+        return
+
+    content = open(index_path, "r", encoding="utf-8").read()
+
+    semi = (out.get("nav") or {}).get("semi") or {}
+    mkt_sbg = (out.get("market") or {}).get("sbg") or {}
+    sbg_now  = semi.get("sbg_price_jpy")
+    sbg_prev = mkt_sbg.get("prev_close")
+    disc_pct = semi.get("discount_pct")
+
+    content = _replace_by_id(content, "gen-at", _fmt_date_jst(out.get("generated_at")))
+    content = _replace_by_id(content, "h-ideal", _yen(semi.get("nav_per_share_jpy")))
+    nav_tn = semi.get("nav_tn")
+    content = _replace_by_id(content, "h-ideal-tn", f"{_num(nav_tn, 2)}兆円" if nav_tn is not None else "—")
+    content = _replace_by_id(content, "h-sbg", _yen(sbg_now))
+
+    if sbg_now is not None and sbg_prev is not None:
+        chg = sbg_now - sbg_prev
+        chg_pct = chg / sbg_prev * 100
+        sign = "+" if chg >= 0 else ""
+        chg_text = f"{sign}{round(chg):,}円  ({sign}{_num(chg_pct, 2)}%)"
+        content = _replace_class_and_id(content, "h-chg", "chg " + ("up" if chg >= 0 else "down"), chg_text)
+
+    if disc_pct is not None:
+        content = _replace_class_and_id(content, "h-disc", "disc-val " + ("up" if disc_pct >= 0 else "down"), _pct(disc_pct))
+        label = "割安（実株価 < NAV）" if disc_pct >= 0 else "割高（実株価 > NAV）"
+        content = _replace_class_and_id(content, "h-disc-label", "disc-label " + ("up" if disc_pct >= 0 else "down"), label)
+
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print("[bake] index.html 焼き込み完了")
+
+
 # ── 出力 ────────────────────────────────────────────────────────────────────
 output = {
     "generated_at":   datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S+09:00"),
@@ -300,6 +390,8 @@ output = {
 
 with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
+
+bake_index_html(output, INDEX_PATH)
 
 print(f"\n--- 書き出し完了: {OUTPUT_PATH} ({overall_status}) ---")
 print(f"② 理論株価: ¥{semi_nav_per_share:,}" if semi_nav_per_share else "② 計算失敗")

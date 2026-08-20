@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json index.html
           # generated_at は毎回必ず変化するため除外して判定。
           # それ以外の差分（株価・NAV・為替）がある場合のみコミットする。
           if git diff --staged -- data.json | grep -v '"generated_at"' | grep -qE '^\+[^+]|^-[^-]'; then
