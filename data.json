@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-08-24T07:30:41+09:00",
+  "generated_at": "2026-08-25T07:30:41+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 243.32,
-      "prev_close": 250.72,
-      "date": "2026-08-21",
+      "close": 238.78,
+      "prev_close": 243.32,
+      "date": "2026-08-24",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 183.04,
-      "prev_close": 181.22,
-      "date": "2026-08-21",
+      "close": 182.62,
+      "prev_close": 183.04,
+      "date": "2026-08-24",
       "status": "ok"
     },
     "sbkk": {
       "ticker": "9434.T",
-      "close": 233.8,
-      "prev_close": 233.1,
-      "date": "2026-08-21",
+      "close": 235.0,
+      "prev_close": 233.8,
+      "date": "2026-08-24",
       "status": "ok"
     },
     "sbg": {
       "ticker": "9984.T",
-      "close": 5255.0,
-      "prev_close": 5387.0,
-      "date": "2026-08-21",
+      "close": 4975.0,
+      "prev_close": 5255.0,
+      "date": "2026-08-24",
       "status": "ok"
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 158.923,
+      "close": 159.102,
       "prev_close": 158.883,
-      "date": "2026-08-23",
+      "date": "2026-08-24",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBGがQ1決算発表(8/6)で開示した「8/5時点の株価・為替による試算NAV」。円/株はNAV総額と確定株式数(box1・box2と同一方式で逆算検証済み)から算出。"
     },
     "semi": {
-      "nav_per_share_jpy": 9868,
-      "nav_tn": 56.2435,
-      "sbg_price_jpy": 5255.0,
-      "discount_pct": 46.7
+      "nav_per_share_jpy": 9768,
+      "nav_tn": 55.6713,
+      "sbg_price_jpy": 4975.0,
+      "discount_pct": 49.1
     },
     "official_nav_per_share_jpy": 12686,
-    "sbg_actual_price_jpy": 5255.0,
-    "discount_pct": 58.6,
-    "semi_nav_per_share_jpy": 9868,
-    "semi_discount_pct": 46.7
+    "sbg_actual_price_jpy": 4975.0,
+    "discount_pct": 60.8,
+    "semi_nav_per_share_jpy": 9768,
+    "semi_discount_pct": 49.1
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時には日次NAVへの反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 33.519,
-    "sbkk_value_tn_jpy": 3.1346,
+    "arm_value_tn_jpy": 32.9306,
+    "sbkk_value_tn_jpy": 3.1506,
     "tmus_value_tn_jpy": 0.0,
     "unlisted_tn_jpy": 30.4,
-    "holdings_total_tn_jpy": 67.0535,
+    "holdings_total_tn_jpy": 66.4813,
     "net_debt_tn_jpy": 10.81,
-    "semi_nav_tn_jpy": 56.2435
+    "semi_nav_tn_jpy": 55.6713
   },
   "official": {
     "valid_from": "2026-06-30",
@@ -1268,15 +1268,15 @@
       "usdjpy": 158.883
     },
     {
-      "date": "2026-08-23",
+      "date": "2026-08-24",
       "nav_epoch": "2026-06-30",
-      "nav_tn": 56.3402,
-      "nav_per_share": 9885,
-      "sbg_price": 5255.0,
-      "discount_pct": 46.8,
-      "arm": 243.32,
-      "sbkk": 233.8,
-      "usdjpy": 158.923
+      "nav_tn": 55.7251,
+      "nav_per_share": 9777,
+      "sbg_price": 4975.0,
+      "discount_pct": 49.1,
+      "arm": 238.78,
+      "sbkk": 235.0,
+      "usdjpy": 158.904
     }
   ],
   "snapshots": [
@@ -1314,19 +1314,19 @@
     },
     {
       "label": "latest",
-      "date": "2026-08-23",
-      "arm_tn": 33.6157,
-      "sbkk_tn": 3.1346,
+      "date": "2026-08-24",
+      "arm_tn": 32.9845,
+      "sbkk_tn": 3.1506,
       "tmus_tn": 0.0,
       "svf2_tn": 19.29,
       "svf1_tn": 3.6,
       "latam_tn": 1.0,
       "other_tn": 6.51,
       "net_debt_tn": 10.81,
-      "holdings_tn": 67.1502,
-      "nav_tn": 56.3402,
-      "nav_per_share": 9885,
-      "sbg_price": 5255.0
+      "holdings_tn": 66.5351,
+      "nav_tn": 55.7251,
+      "nav_per_share": 9777,
+      "sbg_price": 4975.0
     }
   ],
   "official_points": [
@@ -1355,7 +1355,7 @@
       "total_tn": 58.3
     }
   ],
-  "timeseries_generated_at": "2026-08-23T22:30:43Z",
+  "timeseries_generated_at": "2026-08-24T22:30:43Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
