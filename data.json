@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-11-03T07:30:46+09:00",
+  "generated_at": "2026-11-04T07:30:45+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
     "arm": {
       "ticker": "ARM",
-      "close": 196.79,
-      "prev_close": 205.97,
-      "date": "2026-11-02",
+      "close": 202.49,
+      "prev_close": 196.79,
+      "date": "2026-11-03",
       "status": "ok"
     },
     "tmus": {
       "ticker": "TMUS",
-      "close": 160.15,
-      "prev_close": 156.44,
-      "date": "2026-11-02",
+      "close": 154.41,
+      "prev_close": 160.15,
+      "date": "2026-11-03",
       "status": "ok"
     },
     "sbkk": {
@@ -33,9 +33,9 @@
     },
     "usdjpy": {
       "ticker": "USDJPY=X",
-      "close": 157.87,
-      "prev_close": 157.804,
-      "date": "2026-11-02",
+      "close": 158.674,
+      "prev_close": 157.677,
+      "date": "2026-11-03",
       "status": "ok"
     }
   },
@@ -53,16 +53,16 @@
       "note": "SBGがQ1決算発表(8/6)で開示した「8/5時点の株価・為替による試算NAV」。円/株はNAV総額と確定株式数(box1・box2と同一方式で逆算検証済み)から算出。"
     },
     "semi": {
-      "nav_per_share_jpy": 8715,
-      "nav_tn": 49.6688,
+      "nav_per_share_jpy": 8876,
+      "nav_tn": 50.59,
       "sbg_price_jpy": 4410.0,
-      "discount_pct": 49.4
+      "discount_pct": 50.3
     },
     "official_nav_per_share_jpy": 12686,
     "sbg_actual_price_jpy": 4410.0,
     "discount_pct": 65.2,
-    "semi_nav_per_share_jpy": 8715,
-    "semi_discount_pct": 49.4
+    "semi_nav_per_share_jpy": 8876,
+    "semi_discount_pct": 50.3
   },
   "openai": {
     "sbg_stake_value_usd_bn": 79.6,
@@ -74,13 +74,13 @@
     "future_note": "OpenAI上場時には日次NAVへの反映に対応予定"
   },
   "nav_breakdown": {
-    "arm_value_tn_jpy": 26.9295,
+    "arm_value_tn_jpy": 27.8507,
     "sbkk_value_tn_jpy": 3.1493,
     "tmus_value_tn_jpy": 0.0,
     "unlisted_tn_jpy": 30.4,
-    "holdings_total_tn_jpy": 60.4788,
+    "holdings_total_tn_jpy": 61.4,
     "net_debt_tn_jpy": 10.81,
-    "semi_nav_tn_jpy": 49.6688
+    "semi_nav_tn_jpy": 50.59
   },
   "official": {
     "valid_from": "2026-06-30",
@@ -1820,13 +1820,24 @@
     {
       "date": "2026-11-02",
       "nav_epoch": "2026-06-30",
-      "nav_tn": 49.7465,
-      "nav_per_share": 8728,
+      "nav_tn": 49.7135,
+      "nav_per_share": 8723,
       "sbg_price": 4410.0,
-      "discount_pct": 49.5,
+      "discount_pct": 49.4,
       "arm": 196.79,
       "sbkk": 234.9,
-      "usdjpy": 157.87
+      "usdjpy": 157.677
+    },
+    {
+      "date": "2026-11-03",
+      "nav_epoch": "2026-06-30",
+      "nav_tn": 50.6703,
+      "nav_per_share": 8891,
+      "sbg_price": 4410.0,
+      "discount_pct": 50.4,
+      "arm": 202.49,
+      "sbkk": 234.9,
+      "usdjpy": 158.674
     }
   ],
   "snapshots": [
@@ -1864,8 +1875,8 @@
     },
     {
       "label": "latest",
-      "date": "2026-11-02",
-      "arm_tn": 27.0072,
+      "date": "2026-11-03",
+      "arm_tn": 27.931,
       "sbkk_tn": 3.1493,
       "tmus_tn": 0.0,
       "svf2_tn": 19.29,
@@ -1873,9 +1884,9 @@
       "latam_tn": 1.0,
       "other_tn": 6.51,
       "net_debt_tn": 10.81,
-      "holdings_tn": 60.5565,
-      "nav_tn": 49.7465,
-      "nav_per_share": 8728,
+      "holdings_tn": 61.4803,
+      "nav_tn": 50.6703,
+      "nav_per_share": 8891,
       "sbg_price": 4410.0
     }
   ],
@@ -1905,7 +1916,7 @@
       "total_tn": 58.3
     }
   ],
-  "timeseries_generated_at": "2026-11-02T22:30:47Z",
+  "timeseries_generated_at": "2026-11-03T22:30:47Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
