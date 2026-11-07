@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T07:30:38+09:00",
+  "generated_at": "2026-11-08T07:30:47+09:00",
   "reference_note": "上場株は最新終値、東証銘柄は直近営業日終値。基準は米国市場クローズ後を想定。",
   "status": "complete",
   "market": {
@@ -34,8 +34,8 @@
     "usdjpy": {
       "ticker": "USDJPY=X",
       "close": 158.425,
-      "prev_close": 158.357,
-      "date": "2026-11-06",
+      "prev_close": 157.498,
+      "date": "2026-11-08",
       "status": "ok"
     }
   },
@@ -1864,6 +1864,17 @@
     {
       "date": "2026-11-06",
       "nav_epoch": "2026-06-30",
+      "nav_tn": 46.6542,
+      "nav_per_share": 8186,
+      "sbg_price": 3549.0,
+      "discount_pct": 56.6,
+      "arm": 174.62,
+      "sbkk": 235.4,
+      "usdjpy": 157.498
+    },
+    {
+      "date": "2026-11-08",
+      "nav_epoch": "2026-06-30",
       "nav_tn": 46.7949,
       "nav_per_share": 8210,
       "sbg_price": 3549.0,
@@ -1908,7 +1919,7 @@
     },
     {
       "label": "latest",
-      "date": "2026-11-06",
+      "date": "2026-11-08",
       "arm_tn": 24.0489,
       "sbkk_tn": 3.156,
       "tmus_tn": 0.0,
@@ -1949,7 +1960,7 @@
       "total_tn": 58.3
     }
   ],
-  "timeseries_generated_at": "2026-11-06T22:30:40Z",
+  "timeseries_generated_at": "2026-11-07T22:30:48Z",
   "timeseries_base": {
     "as_of": "2026-03-31",
     "arm_price_usd": 151.27999877929688,
