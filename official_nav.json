@@ -88,8 +88,8 @@
       "as_of_fx_usdjpy": 157.35,
       "components": {
         "listed": {
-          "arm":  {"value_tn_jpy": 38.16, "price_asof": 289.66, "currency": "USD"},
-          "sbkk": {"value_tn_jpy": 3.42,  "price_asof": 241.1,  "currency": "JPY"},
+          "arm":  {"value_tn_jpy": 38.16, "gross_value_tn_jpy": 42.06, "margin_loan_tn_jpy": 3.90, "price_asof": 289.66, "currency": "USD"},
+          "sbkk": {"value_tn_jpy": 3.42,  "gross_value_tn_jpy": 4.62,  "margin_loan_tn_jpy": 1.20, "price_asof": 241.1,  "currency": "JPY"},
           "tmus": {"value_tn_jpy": 0.0,   "price_asof": 163.08, "currency": "USD"}
         },
         "unlisted_total_tn_jpy": 29.55,

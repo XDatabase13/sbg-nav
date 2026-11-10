@@ -107,6 +107,18 @@ for e in nav_epochs:
 
 
 # ── 1日分の②NAV計算 ──────────────────────────────────────────────────────────
+def _listed_value(c: dict, p_ratio: float, fx_ratio: float | None = None) -> float:
+    """上場株の価値。マージンローン欄があれば「時価×株価比(×為替比)−ローン固定額」
+    （説明会資料p.82の定義）、なければ従来式「調整後価値×株価比(×為替比)」。"""
+    if "gross_value_tn_jpy" in c and "margin_loan_tn_jpy" in c:
+        v = c["gross_value_tn_jpy"] * p_ratio
+        if fx_ratio is not None:
+            v = v * fx_ratio
+        return v - c["margin_loan_tn_jpy"]
+    v = c["value_tn_jpy"] * p_ratio          # 従来式と同じ演算順序
+    return v * fx_ratio if fx_ratio is not None else v
+
+
 def calc_nav(row, epoch: dict) -> dict | None:
     arm_p    = row["ARM"]
     sbkk_p   = row["9434.T"]
@@ -123,9 +135,10 @@ def calc_nav(row, epoch: dict) -> dict | None:
     net_debt_tn = epoch["components"]["net_debt_tn_jpy"]
     shares      = epoch["shares_outstanding"]
 
-    arm_val  = listed["arm"]["value_tn_jpy"]  * (float(arm_p)  / base["ARM"])      * (float(usdjpy_p) / base["USDJPY=X"])
-    sbkk_val = listed["sbkk"]["value_tn_jpy"] * (float(sbkk_p) / base["9434.T"])
-    tmus_val = listed["tmus"]["value_tn_jpy"] * (float(tmus_p) / base["TMUS"])     * (float(usdjpy_p) / base["USDJPY=X"])
+    fx_r     = float(usdjpy_p) / base["USDJPY=X"]
+    arm_val  = _listed_value(listed["arm"],  float(arm_p)  / base["ARM"],    fx_r)
+    sbkk_val = _listed_value(listed["sbkk"], float(sbkk_p) / base["9434.T"])
+    tmus_val = _listed_value(listed["tmus"], float(tmus_p) / base["TMUS"],   fx_r)
 
     holdings      = arm_val + sbkk_val + tmus_val + unlisted_tn
     nav_tn        = holdings - net_debt_tn

@@ -236,6 +236,12 @@ def semi_value(key):
     p_now = market[key]["close"]
     if p_now is None or fx_now is None:
         return None
+    if "gross_value_tn_jpy" in c and "margin_loan_tn_jpy" in c:
+        # 時価を株価比（・為替比）で伸縮し、マージンローンは固定額で控除（説明会資料p.82の定義）
+        if c["currency"] == "USD":
+            return c["gross_value_tn_jpy"] * (p_now / c["price_asof"]) * (fx_now / fx_asof) - c["margin_loan_tn_jpy"]
+        return c["gross_value_tn_jpy"] * (p_now / c["price_asof"]) - c["margin_loan_tn_jpy"]
+    # 以下は従来式のまま（マージンローン欄のない古いepoch）
     if c["currency"] == "USD":
         return c["value_tn_jpy"] * (p_now / c["price_asof"]) * (fx_now / fx_asof)
     return c["value_tn_jpy"] * (p_now / c["price_asof"])
