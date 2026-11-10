@@ -354,7 +354,8 @@ def bake_index_html(out: dict, index_path: str) -> None:
 
     if disc_pct is not None:
         content = _replace_class_and_id(content, "h-disc", "disc-val " + ("up" if disc_pct >= 0 else "down"), _pct(disc_pct))
-        label = "割安（実株価 < NAV）" if disc_pct >= 0 else "割高（実株価 > NAV）"
+        # 「<」は焼き込みの正規表現 [^<]* を途中で止めて毎回追記される原因になるため実体参照で書く
+        label = "割安（実株価 &lt; NAV）" if disc_pct >= 0 else "割高（実株価 &gt; NAV）"
         content = _replace_class_and_id(content, "h-disc-label", "disc-label " + ("up" if disc_pct >= 0 else "down"), label)
 
     with open(index_path, "w", encoding="utf-8") as f:
