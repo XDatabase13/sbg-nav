@@ -1,15 +1,15 @@
 {
   "_meta": {
     "official_b": {
-      "nav_per_share_jpy": 10230,
-      "total_tn": 58.3,
-      "as_of": "2026-08-05",
-      "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q1fy2026_02.pdf",
-      "note": "SBGがQ1決算発表(8/6)で開示した「8/5時点の株価・為替による試算NAV」。円/株はNAV総額と確定株式数(box1・box2と同一方式で逆算検証済み)から算出。"
+      "nav_per_share_jpy": 7843,
+      "total_tn": 44.7,
+      "as_of": "2026-11-09",
+      "source_label": "SBG 2027年3月期 第2四半期 決算説明会資料 p.20・p.83",
+      "note": "SBGがQ2決算説明会資料p.20「Q2プロフォーマ」で開示した2026-11-09時点の試算NAV（定義はp.83：Arm・ソフトバンク・Intelは11/9終値、その他の上場株は9/30終値、1ドル=158.34円）。円/株は44.7兆円÷5,699,306,663株で逆算（8/5と同じ方式）。"
     },
     "openai": {
-      "sbg_stake_value_usd_bn": 79.6,
-      "sbg_stake_value_as_of": "2026-03-31",
+      "sbg_stake_value_usd_bn": 99.6,
+      "sbg_stake_value_as_of": "2026-09-30",
       "company_valuation_usd_bn": 852.0,
       "company_valuation_as_of": "2026-03-31",
       "company_valuation_note": "2026年3月31日完了ラウンドのポストマネー評価額",
