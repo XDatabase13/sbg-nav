@@ -73,6 +73,34 @@
           "other_tn": 6.51
         }
       }
+    },
+    {
+      "valid_from": "2026-09-30",
+      "as_of_label": "FY2026 Q2",
+      "as_of": "2026-09-30",
+      "source": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/presentations/2026/earnings-datasheet_q2fy2026_02.pdf",
+      "official_nav_per_share_jpy": 10499,
+      "nav_total_tn": 59.84,
+      "holdings_total_jpy_tn": 71.14,
+      "net_debt_jpy_tn": 11.3,
+      "shares_outstanding": 5699306663,
+      "note": "SBG公式SOTPの四半期末値(2026年9月末、決算データシート「13_NAV&LTV」・「14_LTV Calculation」、決算説明会資料p.82)。第1号の慣例どおり valid_from=as_of。build_history が時系列を毎日再生成するため、チャートは 9/30 から新 epoch で描き直される。保有株式価値はアセットバック・ファイナンス調整後: Arm 38.16兆円(時価42.06−Arm株式を利用したマージンローン3.90)、SBKK 3.42兆円(時価4.62−同社株式を利用したマージンローン1.20)、T-Mobile 0(時価0.26−カラー契約の満期決済金額0.26)、その他5.07兆円(6.31−Intel株式のカラー契約に係る金融負債1.24)。内訳の合計は71.13兆円で公表V 71.14兆円と0.01兆円の丸め差(holdings_total・nav_total・円/株は公表値)。純負債の検算根拠: 連結純有利子負債25.04兆円−独立採算子会社等6.48兆円−その他調整7.25兆円=11.30兆円(LTV 15.9%)。株式数は決算短信: 期末発行済5,711,848,120−期末自己株式12,541,457。基準株価は2026年9月30日終値(配当調整なし)、為替は会社公表1ドル=157.35円。次回決算発表時に手動更新する。",
+      "as_of_fx_usdjpy": 157.35,
+      "components": {
+        "listed": {
+          "arm":  {"value_tn_jpy": 38.16, "price_asof": 289.66, "currency": "USD"},
+          "sbkk": {"value_tn_jpy": 3.42,  "price_asof": 241.1,  "currency": "JPY"},
+          "tmus": {"value_tn_jpy": 0.0,   "price_asof": 163.08, "currency": "USD"}
+        },
+        "unlisted_total_tn_jpy": 29.55,
+        "net_debt_tn_jpy": 11.3,
+        "unlisted_breakdown": {
+          "svf2_tn": 20.07,
+          "svf1_tn":  3.45,
+          "latam_tn": 0.96,
+          "other_tn": 5.07
+        }
+      }
     }
   ]
 }
